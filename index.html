@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>曹泽祯 - 全栈开发工程师</title>
     <style>
+        /* ========================================
+           设计系统基础 - 科技风格主题
+           ======================================== */
         * {
             margin: 0;
             padding: 0;
@@ -20,51 +23,90 @@
             --spacing-xl: 48px;
             --spacing-2xl: 64px;
             --spacing-3xl: 80px;
-            
-            /* 颜色系统 */
-            --primary: #6366f1;
-            --secondary: #ec4899;
-            --background: #0a0a0a;
-            --card-bg: rgba(15, 15, 15, 0.7);
-            --text-primary: #ffffff;
-            --text-secondary: #e0e0e0;
-            --text-muted: #a3a3a3;
-            
+
+            /* 科技色彩系统 - 精细化调整 */
+            /* 主色调：科技蓝 */
+            --primary: #0EA5E9;
+            --primary-dark: #0284C7;
+            --primary-light: #38BDF8;
+            --primary-glow: rgba(14, 165, 233, 0.4);
+
+            /* 次要色：深空紫 */
+            --secondary: #A855F7;
+            --secondary-dark: #9333EA;
+            --secondary-light: #C084FC;
+
+            /* 强调色：霓虹青 */
+            --accent: #22D3EE;
+            --accent-glow: rgba(34, 211, 238, 0.3);
+
+            /* 深空灰背景系统 */
+            --background: #030712;
+            --background-secondary: #0F172A;
+            --background-tertiary: #1E293B;
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --card-bg-hover: rgba(30, 41, 59, 0.9);
+
+            /* 文字层级 */
+            --text-primary: #F8FAFC;
+            --text-secondary: #CBD5E1;
+            --text-muted: #64748B;
+
+            /* 边框系统 */
+            --border-subtle: rgba(148, 163, 184, 0.1);
+            --border-color: rgba(14, 165, 233, 0.25);
+            --border-glow: rgba(14, 165, 233, 0.5);
+
             /* 字体系统 */
-            --font-size-xs: 0.875rem;
-            --font-size-sm: 1rem;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
             --font-size-md: 1.125rem;
             --font-size-lg: 1.25rem;
             --font-size-xl: 1.5rem;
             --font-size-2xl: 2rem;
             --font-size-3xl: 2.5rem;
             --font-size-4xl: 3.5rem;
-            
-            /* 圆角 */
-            --radius-sm: 5px;
-            --radius-md: 10px;
-            --radius-lg: 15px;
-            --radius-xl: 20px;
-            
-            /* 阴影 */
-            --shadow-sm: 0 4px 16px rgba(99, 102, 241, 0.1);
-            --shadow-md: 0 8px 32px rgba(99, 102, 241, 0.1);
-            --shadow-lg: 0 12px 40px rgba(99, 102, 241, 0.2);
-            
-            /* 边框颜色 */
-            --border-color: rgba(99, 102, 241, 0.3);
-            --primary-light: rgba(99, 102, 241, 0.5);
-            
-            /* 渐变颜色 */
-            --gradient-light: rgba(99, 102, 241, 0.1);
+
+            /* 圆角系统 */
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* 阴影系统 - 科技光晕 */
+            --shadow-sm: 0 4px 12px rgba(14, 165, 233, 0.08);
+            --shadow-md: 0 8px 30px rgba(14, 165, 233, 0.12);
+            --shadow-lg: 0 16px 50px rgba(14, 165, 233, 0.18);
+            --shadow-glow: 0 0 40px rgba(14, 165, 233, 0.25);
+
+            /* 渐变系统 */
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient-bg: radial-gradient(ellipse at top, #0F172A 0%, #030712 100%);
+            --gradient-card: linear-gradient(135deg, rgba(14, 165, 233, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+            --gradient-shine: linear-gradient(135deg, transparent 0%, rgba(14, 165, 233, 0.08) 50%, transparent 100%);
+
+            /* 动画缓动函数 */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
+        /* ========================================
+           基础样式与背景
+           ======================================== */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--background);
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gradient-bg);
             color: var(--text-primary);
             overflow-x: hidden;
             min-height: 100vh;
+            line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* 粒子背景容器 */
@@ -74,20 +116,55 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        /* 鼠标跟随效果 */
+        /* 网格纹理叠加层 - 新增科技感网格背景 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(14, 165, 233, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14, 165, 233, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 鼠标跟随效果 - 科技光晕 */
         #cursor {
             position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #6366f1;
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--primary);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
-            transition: all 0.1s ease;
-            mix-blend-mode: difference;
+            transition: transform 0.15s var(--ease-out-expo),
+                        width 0.3s var(--ease-out-expo),
+                        height 0.3s var(--ease-out-expo),
+                        border-color 0.3s ease,
+                        background 0.3s ease;
+            mix-blend-mode: screen;
+            opacity: 0.7;
+        }
+
+        #cursor::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 50%;
+            transition: transform 0.3s var(--ease-out-expo), opacity 0.3s ease;
         }
 
         /* 主容器 */
@@ -95,23 +172,28 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 var(--spacing-md);
+            position: relative;
+            z-index: 1;
         }
 
-        /* 头部 */
+        /* ========================================
+           头部 - 个人名片卡
+           ======================================== */
         header {
             padding: var(--spacing-3xl) 0 var(--spacing-xl);
             text-align: center;
         }
 
-        /* 个人名字卡片组件 */
         .name-card {
-            backdrop-filter: blur(10px);
-            background: var(--card-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.75) 100%);
             border-radius: var(--radius-xl);
             padding: var(--spacing-xl);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md),
+                        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+            transition: all 0.5s var(--ease-out-expo);
             max-width: 800px;
             margin: 0 auto;
             position: relative;
@@ -122,27 +204,51 @@
             text-align: center;
         }
 
+        /* 多层光晕效果 */
         .name-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-            transform: rotate(45deg);
-            animation: shine 6s linear infinite;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: conic-gradient(from 0deg at 50% 50%,
+                transparent 0deg,
+                rgba(14, 165, 233, 0.06) 60deg,
+                transparent 120deg,
+                rgba(168, 85, 247, 0.04) 180deg,
+                transparent 240deg,
+                rgba(34, 211, 238, 0.05) 300deg,
+                transparent 360deg);
+            animation: rotateGlow 20s linear infinite;
+            pointer-events: none;
         }
 
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 顶部渐变装饰线 */
+        .name-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                var(--primary-light) 50%,
+                transparent 100%);
+            opacity: 0.6;
         }
 
         .name-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(99, 102, 241, 0.5);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg),
+                        0 0 60px rgba(14, 165, 233, 0.15);
+            border-color: var(--border-glow);
         }
 
         .name-card-inner {
@@ -157,33 +263,58 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 3px solid var(--primary);
+            border: 3px solid transparent;
+            background: linear-gradient(var(--background), var(--background)) padding-box,
+                        var(--gradient-primary) border-box;
             margin-bottom: var(--spacing-lg);
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-            transition: all 0.3s ease;
+            box-shadow: 0 0 30px var(--primary-glow),
+                        0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: all 0.5s var(--ease-out-expo);
+            position: relative;
+        }
+
+        .name-card-avatar::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+            filter: blur(15px);
         }
 
         .name-card:hover .name-card-avatar {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+            transform: scale(1.08);
+            box-shadow: 0 0 50px var(--primary-glow),
+                        0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .name-card:hover .name-card-avatar::before {
+            opacity: 0.5;
         }
 
         .name-card-name {
             font-size: var(--font-size-4xl);
             margin-bottom: var(--spacing-xs);
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, var(--primary-light) 50%, var(--secondary-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             background-size: 200% 200%;
-            animation: gradientShift 3s ease-in-out infinite;
-            font-weight: bold;
+            animation: gradientShift 4s ease-in-out infinite;
+            text-shadow: 0 0 60px rgba(14, 165, 233, 0.3);
         }
 
         .name-card-title {
             font-size: var(--font-size-lg);
             color: var(--text-muted);
             margin-bottom: var(--spacing-md);
+            font-weight: 500;
+            letter-spacing: 0.05em;
         }
 
         .name-card-description {
@@ -191,7 +322,8 @@
             color: var(--text-secondary);
             margin-bottom: var(--spacing-lg);
             max-width: 600px;
-            line-height: 1.6;
+            line-height: 1.8;
+            font-weight: 400;
         }
 
         .name-card-contact {
@@ -208,35 +340,48 @@
             gap: var(--spacing-xs);
             color: var(--text-secondary);
             font-size: var(--font-size-sm);
+            transition: color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--primary-light);
         }
 
         .contact-item svg {
             color: var(--primary);
             width: 16px;
             height: 16px;
+            flex-shrink: 0;
+            transition: transform 0.3s var(--ease-out-expo);
+        }
+
+        .contact-item:hover svg {
+            transform: scale(1.2);
         }
 
         h1 {
             font-size: var(--font-size-4xl);
             margin-bottom: var(--spacing-xs);
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, var(--primary-light) 50%, var(--secondary-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradientShift 3s ease-in-out infinite;
+            animation: gradientShift 4s ease-in-out infinite;
             background-size: 200% 200%;
         }
 
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
+            0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         .subtitle {
             font-size: var(--font-size-lg);
             color: var(--text-muted);
             margin-bottom: var(--spacing-md);
+            font-weight: 400;
         }
 
         .social-links {
@@ -252,14 +397,15 @@
             justify-content: center;
             width: 50px;
             height: 50px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            color: var(--text-primary);
+            border-radius: var(--radius-md);
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s var(--ease-out-expo);
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
         .social-link::before {
@@ -269,8 +415,12 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(14, 165, 233, 0.2),
+                rgba(168, 85, 247, 0.15),
+                transparent);
+            transition: left 0.6s var(--ease-out-expo);
         }
 
         .social-link:hover::before {
@@ -278,19 +428,28 @@
         }
 
         .social-link:hover {
-            background: rgba(99, 102, 241, 0.2);
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
-            border-color: rgba(99, 102, 241, 0.5);
-            color: var(--primary);
+            background: rgba(14, 165, 233, 0.15);
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.25),
+                        0 0 0 1px rgba(14, 165, 233, 0.3);
+            border-color: var(--primary);
+            color: var(--primary-light);
         }
 
         .social-link:hover svg {
-            transform: rotate(360deg);
-            transition: transform 0.5s ease;
+            transform: rotate(360deg) scale(1.1);
+            transition: all 0.5s var(--ease-out-expo);
         }
 
-        /* 导航栏 */
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.5s var(--ease-out-expo);
+        }
+
+        /* ========================================
+           导航栏 - 玻璃拟态设计
+           ======================================== */
         nav {
             position: sticky;
             top: var(--spacing-md);
@@ -299,12 +458,14 @@
         }
 
         .nav-container {
-            backdrop-filter: blur(10px);
-            background: rgba(15, 15, 15, 0.8);
-            border-radius: var(--radius-md);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(30, 41, 59, 0.65) 100%);
+            border-radius: var(--radius-lg);
             padding: var(--spacing-sm);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-sm),
+                        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
             max-width: 800px;
             margin: 0 auto;
             position: relative;
@@ -316,9 +477,12 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05));
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(14, 165, 233, 0.4) 50%,
+                transparent 100%);
         }
 
         .nav-links-inner {
@@ -334,15 +498,17 @@
         }
 
         .nav-link {
-            color: var(--text-primary);
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
+            font-size: var(--font-size-sm);
+            transition: all 0.4s var(--ease-out-expo);
             position: relative;
             padding: var(--spacing-xs) var(--spacing-md);
             border-radius: var(--radius-sm);
             overflow: hidden;
             z-index: 1;
+            letter-spacing: 0.02em;
         }
 
         .nav-link::before {
@@ -352,8 +518,12 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(14, 165, 233, 0.1),
+                rgba(168, 85, 247, 0.08),
+                transparent);
+            transition: left 0.5s var(--ease-out-expo);
             z-index: -1;
         }
 
@@ -362,27 +532,31 @@
         }
 
         .nav-link:hover {
-            color: var(--primary);
-            background: rgba(99, 102, 241, 0.1);
-            transform: translateY(-2px);
+            color: var(--primary-light);
+            background: rgba(14, 165, 233, 0.08);
         }
 
         .nav-link::after {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transition: width 0.3s ease;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+            transition: width 0.4s var(--ease-out-expo);
+            box-shadow: 0 0 10px var(--primary-glow);
         }
 
         .nav-link:hover::after {
-            width: 100%;
+            width: 70%;
         }
 
-        /* 主要内容 */
+        /* ========================================
+           主要内容区域
+           ======================================== */
         main {
             padding: var(--spacing-xl) 0;
         }
@@ -395,21 +569,38 @@
             font-size: var(--font-size-3xl);
             margin-bottom: var(--spacing-xl);
             text-align: center;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 50%, var(--secondary-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             background-size: 200% 200%;
-            animation: gradientShift 3s ease-in-out infinite;
+            animation: gradientShift 4s ease-in-out infinite;
+            position: relative;
         }
 
-        /* 关于我 */
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-primary);
+            margin: var(--spacing-sm) auto 0;
+            border-radius: 3px;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        /* ========================================
+           关于我区域
+           ======================================== */
         .about-content {
-            backdrop-filter: blur(10px);
-            background: var(--card-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.7) 100%);
             border-radius: var(--radius-xl);
             padding: var(--spacing-xl);
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            border: 1px solid var(--border-color);
             box-shadow: var(--shadow-md);
             max-width: 800px;
             margin: 0 auto;
@@ -424,9 +615,24 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-            transform: rotate(45deg);
-            animation: shine 6s linear infinite;
+            background: conic-gradient(from 180deg at 50% 50%,
+                transparent 0deg,
+                rgba(14, 165, 233, 0.06) 90deg,
+                transparent 180deg);
+            animation: rotateGlow 15s linear infinite reverse;
+        }
+
+        .about-content::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(14, 165, 233, 0.4) 50%,
+                transparent 100%);
         }
 
         .about-content-inner {
@@ -436,64 +642,73 @@
 
         .about-text {
             font-size: var(--font-size-md);
-            line-height: 1.8;
+            line-height: 1.9;
             color: var(--text-secondary);
+            font-weight: 400;
         }
 
-        /* 技能 */
+        /* ========================================
+           技能卡片 - 科技感设计
+           ======================================== */
         .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: var(--spacing-lg);
         }
 
         .skill-card {
-            backdrop-filter: blur(10px);
-            background: var(--card-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
             border-radius: var(--radius-lg);
             padding: var(--spacing-lg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.5s var(--ease-out-expo);
             position: relative;
             overflow: hidden;
         }
 
+        /* 卡片左上角装饰 */
         .skill-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--gradient-light), transparent);
-            transition: left 0.5s ease;
+            left: 0;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+            transition: all 0.5s var(--ease-out-expo);
         }
 
         .skill-card:hover::before {
-            left: 100%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.25) 0%, transparent 70%);
         }
 
         .skill-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(99, 102, 241, 0.5);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-lg),
+                        0 0 40px rgba(14, 165, 233, 0.1);
+            border-color: var(--border-color);
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%);
         }
 
         .skill-card:hover .skill-title {
-            color: var(--secondary);
-            transition: color 0.3s ease;
-        }
-
-        .skill-card:hover .skill-list li:before {
-            color: var(--secondary);
-            transition: color 0.3s ease;
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .skill-title {
             font-size: var(--font-size-lg);
             margin-bottom: var(--spacing-md);
             color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            transition: all 0.4s var(--ease-out-expo);
         }
 
         .skill-list {
@@ -505,16 +720,29 @@
             color: var(--text-secondary);
             display: flex;
             align-items: center;
+            font-size: var(--font-size-sm);
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
-        .skill-list li:before {
-            content: "•";
-            color: var(--primary);
-            font-weight: bold;
+        .skill-list li:hover {
+            color: var(--primary-light);
+            transform: translateX(4px);
+        }
+
+        .skill-list li::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
             margin-right: var(--spacing-sm);
+            flex-shrink: 0;
+            box-shadow: 0 0 8px var(--primary-glow);
         }
 
-        /* 项目经历 */
+        /* ========================================
+           项目卡片 - 沉浸式设计
+           ======================================== */
         .projects-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -522,65 +750,83 @@
         }
 
         .project-card {
-            backdrop-filter: blur(10px);
-            background: var(--card-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.7) 100%);
             border-radius: var(--radius-lg);
             padding: var(--spacing-lg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.5s var(--ease-out-expo);
             position: relative;
             overflow: hidden;
         }
 
+        /* 项目卡片顶部装饰条 */
         .project-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--gradient-light), transparent);
-            transition: left 0.5s ease;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .project-card:hover::before {
-            left: 100%;
+            opacity: 1;
+        }
+
+        /* 卡片右侧光晕 */
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
+            transition: all 0.5s var(--ease-out-expo);
+            pointer-events: none;
+        }
+
+        .project-card:hover::after {
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
         }
 
         .project-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(99, 102, 241, 0.5);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-lg),
+                        0 0 50px rgba(14, 165, 233, 0.12);
+            border-color: var(--border-color);
         }
 
         .project-card:hover .project-title {
-            color: var(--secondary);
-            transition: color 0.3s ease;
-        }
-
-        .project-card:hover .tech-tag {
-            background: rgba(236, 72, 153, 0.2);
-            color: var(--secondary);
-            border-color: rgba(236, 72, 153, 0.3);
-            transition: all 0.3s ease;
+            color: var(--primary-light);
         }
 
         .project-title {
             font-size: var(--font-size-xl);
             margin-bottom: var(--spacing-xs);
             color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            transition: color 0.4s var(--ease-out-expo);
         }
 
         .project-date {
             font-size: var(--font-size-xs);
             color: var(--text-muted);
             margin-bottom: var(--spacing-md);
+            font-weight: 500;
+            letter-spacing: 0.05em;
         }
 
         .project-description {
             font-size: var(--font-size-sm);
-            line-height: 1.6;
+            line-height: 1.7;
             color: var(--text-secondary);
             margin-bottom: var(--spacing-md);
         }
@@ -592,21 +838,41 @@
         }
 
         .tech-tag {
-            background: rgba(99, 102, 241, 0.2);
-            color: var(--primary);
-            padding: 5px 12px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(168, 85, 247, 0.1) 100%);
+            color: var(--primary-light);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
             font-size: var(--font-size-xs);
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            border: 1px solid rgba(14, 165, 233, 0.25);
+            font-weight: 500;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+
+        .tech-tag:hover {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(168, 85, 247, 0.2) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
         }
 
         /* 项目成果 */
         .project-achievements {
             margin: var(--spacing-md) 0;
             padding: var(--spacing-md);
-            background: rgba(99, 102, 241, 0.05);
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(168, 85, 247, 0.05) 100%);
             border-radius: var(--radius-md);
             border-left: 3px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-achievements::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(14, 165, 233, 0.05) 0%, transparent 100%);
         }
 
         .achievement-title {
@@ -619,40 +885,33 @@
         .achievement-list {
             list-style: none;
             padding-left: var(--spacing-sm);
+            position: relative;
+            z-index: 1;
         }
 
         .achievement-list li {
             margin-bottom: var(--spacing-xs);
             color: var(--text-secondary);
             font-size: var(--font-size-xs);
-            line-height: 1.5;
+            line-height: 1.6;
+            transition: color 0.3s ease;
         }
 
-        .achievement-list li:before {
+        .achievement-list li:hover {
+            color: var(--primary-light);
+        }
+
+        .achievement-list li::before {
             content: "✓";
-            color: var(--primary);
+            color: var(--accent);
             font-weight: bold;
             margin-right: var(--spacing-xs);
+            text-shadow: 0 0 8px var(--accent-glow);
         }
 
-        /* 页脚 */
-        footer {
-            backdrop-filter: blur(10px);
-            background: rgba(15, 15, 15, 0.8);
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
-            padding: var(--spacing-xl) 0;
-            text-align: center;
-            margin-top: var(--spacing-3xl);
-        }
-
-        .footer-content {
-            color: var(--text-muted);
-            font-size: var(--font-size-xs);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Hero Section */
+        /* ========================================
+           Hero Section - 首屏区域
+           ======================================== */
         .hero-section {
             padding: var(--spacing-3xl) 0;
             text-align: center;
@@ -661,26 +920,47 @@
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
-            backdrop-filter: blur(10px);
-            background: var(--card-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.75) 100%);
             border-radius: var(--radius-xl);
             padding: var(--spacing-2xl);
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            border: 1px solid var(--border-color);
             box-shadow: var(--shadow-md);
             position: relative;
             overflow: hidden;
         }
 
+        /* Hero 背景光效 */
         .hero-content::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-            transform: rotate(45deg);
-            animation: shine 6s linear infinite;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: conic-gradient(from 0deg at 50% 50%,
+                transparent 0deg,
+                rgba(14, 165, 233, 0.05) 60deg,
+                transparent 120deg,
+                rgba(168, 85, 247, 0.04) 180deg,
+                transparent 240deg,
+                rgba(34, 211, 238, 0.05) 300deg,
+                transparent 360deg);
+            animation: rotateGlow 25s linear infinite;
+        }
+
+        .hero-content::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(14, 165, 233, 0.5) 50%,
+                transparent 100%);
         }
 
         .hero-content-inner {
@@ -691,18 +971,21 @@
         .hero-title {
             font-size: var(--font-size-3xl);
             margin-bottom: var(--spacing-md);
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #fff 0%, var(--primary-light) 50%, var(--secondary-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             background-size: 200% 200%;
-            animation: gradientShift 3s ease-in-out infinite;
+            animation: gradientShift 4s ease-in-out infinite;
         }
 
         .hero-subtitle {
             font-size: var(--font-size-lg);
             color: var(--text-secondary);
             margin-bottom: var(--spacing-xl);
+            font-weight: 400;
         }
 
         .hero-stats {
@@ -712,42 +995,127 @@
             margin-top: var(--spacing-xl);
             flex-wrap: wrap;
             padding-top: var(--spacing-xl);
-            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            border-top: 1px solid var(--border-subtle);
+            position: relative;
+        }
+
+        .hero-stats::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 20%;
+            right: 20%;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(14, 165, 233, 0.4),
+                transparent);
         }
 
         .stat-item {
             text-align: center;
             padding: var(--spacing-md);
             border-radius: var(--radius-md);
-            background: rgba(99, 102, 241, 0.05);
-            min-width: 120px;
-            transition: all 0.3s ease;
+            background: linear-gradient(145deg, rgba(14, 165, 233, 0.08) 0%, rgba(168, 85, 247, 0.05) 100%);
+            border: 1px solid var(--border-subtle);
+            min-width: 140px;
+            transition: all 0.4s var(--ease-out-expo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .stat-item:hover::before {
+            opacity: 1;
         }
 
         .stat-item:hover {
-            background: rgba(99, 102, 241, 0.1);
-            transform: translateY(-5px);
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: var(--shadow-md),
+                        0 0 30px rgba(14, 165, 233, 0.15);
+            border-color: var(--border-color);
         }
 
         .stat-number {
             display: block;
             font-size: var(--font-size-2xl);
-            font-weight: bold;
-            color: var(--primary);
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: var(--spacing-xs);
+            letter-spacing: -0.02em;
         }
 
         .stat-label {
             display: block;
             font-size: var(--font-size-sm);
             color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.02em;
         }
 
-        /* 滚动动画 */
+        /* ========================================
+           页脚
+           ======================================== */
+        footer {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(3, 7, 18, 0.95) 100%);
+            border-top: 1px solid var(--border-subtle);
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+            margin-top: var(--spacing-3xl);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(14, 165, 233, 0.5) 50%,
+                transparent 100%);
+        }
+
+        .footer-content {
+            color: var(--text-muted);
+            font-size: var(--font-size-xs);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .footer-content p:first-child {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* ========================================
+           滚动动画
+           ======================================== */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(40px);
+            transition: opacity 0.8s var(--ease-out-expo),
+                        transform 0.8s var(--ease-out-expo);
         }
 
         .fade-in.visible {
@@ -755,7 +1123,9 @@
             transform: translateY(0);
         }
 
-        /* 响应式设计 */
+        /* ========================================
+           响应式设计
+           ======================================== */
         @media (max-width: 1024px) {
             .container {
                 padding: 0 var(--spacing-md);
@@ -774,11 +1144,11 @@
             }
 
             .skills-container {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             }
 
             .projects-container {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             }
         }
 
@@ -880,13 +1250,13 @@
             }
 
             .social-link {
-                width: 40px;
-                height: 40px;
+                width: 44px;
+                height: 44px;
             }
 
             .social-link svg {
-                width: 16px;
-                height: 16px;
+                width: 18px;
+                height: 18px;
             }
 
             /* 个人名字卡片响应式设计 */
@@ -934,8 +1304,8 @@
             }
 
             .stat-item {
-                min-width: 80px;
-                padding: var(--spacing-xs);
+                min-width: 90px;
+                padding: var(--spacing-sm);
             }
 
             .stat-number {
@@ -1292,7 +1662,7 @@
                         size: Math.random() * 2 + 1,
                         speedX: Math.random() * 0.8 - 0.4,
                         speedY: Math.random() * 0.8 - 0.4,
-                        color: `rgba(99, 102, 241, ${Math.random() * 0.4 + 0.1})`
+                        color: `rgba(14, 165, 233, ${Math.random() * 0.5 + 0.15})`
                     });
                 }
             }
@@ -1339,7 +1709,7 @@
                         
                         if (distance2 < 100) {
                             this.ctx.beginPath();
-                            this.ctx.strokeStyle = `rgba(99, 102, 241, ${0.2 * (1 - distance2 / 100)})`;
+                            this.ctx.strokeStyle = `rgba(14, 165, 233, ${0.25 * (1 - distance2 / 100)})`;
                             this.ctx.lineWidth = 0.5;
                             this.ctx.moveTo(p.x, p.y);
                             this.ctx.lineTo(p2.x, p2.y);
@@ -1370,11 +1740,11 @@
                 links.forEach(link => {
                     link.addEventListener('mouseenter', () => {
                         this.cursor.style.transform = 'scale(1.5)';
-                        this.cursor.style.borderColor = '#ec4899';
+                        this.cursor.style.borderColor = '#A855F7';
                     });
                     link.addEventListener('mouseleave', () => {
                         this.cursor.style.transform = 'scale(1)';
-                        this.cursor.style.borderColor = '#6366f1';
+                        this.cursor.style.borderColor = '#0EA5E9';
                     });
                 });
             }
