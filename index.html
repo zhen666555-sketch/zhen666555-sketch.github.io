@@ -50,6 +50,13 @@
             --shadow-sm: 0 4px 16px rgba(99, 102, 241, 0.1);
             --shadow-md: 0 8px 32px rgba(99, 102, 241, 0.1);
             --shadow-lg: 0 12px 40px rgba(99, 102, 241, 0.2);
+            
+            /* 边框颜色 */
+            --border-color: rgba(99, 102, 241, 0.3);
+            --primary-light: rgba(99, 102, 241, 0.5);
+            
+            /* 渐变颜色 */
+            --gradient-light: rgba(99, 102, 241, 0.1);
         }
 
         body {
@@ -251,12 +258,36 @@
             color: var(--text-primary);
             text-decoration: none;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
         }
 
         .social-link:hover {
             background: rgba(99, 102, 241, 0.2);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.1);
             box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+            border-color: rgba(99, 102, 241, 0.5);
+            color: var(--primary);
+        }
+
+        .social-link:hover svg {
+            transform: rotate(360deg);
+            transition: transform 0.5s ease;
         }
 
         /* 导航栏 */
@@ -311,11 +342,29 @@
             padding: var(--spacing-xs) var(--spacing-md);
             border-radius: var(--radius-sm);
             overflow: hidden;
+            z-index: 1;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
         }
 
         .nav-link:hover {
             color: var(--primary);
             background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-2px);
         }
 
         .nav-link::after {
@@ -364,6 +413,25 @@
             box-shadow: var(--shadow-md);
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 6s linear infinite;
+        }
+
+        .about-content-inner {
+            position: relative;
+            z-index: 1;
         }
 
         .about-text {
@@ -384,7 +452,7 @@
             background: var(--card-bg);
             border-radius: var(--radius-lg);
             padding: var(--spacing-lg);
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            border: 1px solid var(--border-color);
             box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
             position: relative;
@@ -398,7 +466,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, var(--gradient-light), transparent);
             transition: left 0.5s ease;
         }
 
@@ -407,9 +475,19 @@
         }
 
         .skill-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.02);
             box-shadow: var(--shadow-lg);
             border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        .skill-card:hover .skill-title {
+            color: var(--secondary);
+            transition: color 0.3s ease;
+        }
+
+        .skill-card:hover .skill-list li:before {
+            color: var(--secondary);
+            transition: color 0.3s ease;
         }
 
         .skill-title {
@@ -448,7 +526,7 @@
             background: var(--card-bg);
             border-radius: var(--radius-lg);
             padding: var(--spacing-lg);
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            border: 1px solid var(--border-color);
             box-shadow: var(--shadow-md);
             transition: all 0.3s ease;
             position: relative;
@@ -462,7 +540,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, var(--gradient-light), transparent);
             transition: left 0.5s ease;
         }
 
@@ -471,9 +549,21 @@
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.02);
             box-shadow: var(--shadow-lg);
             border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        .project-card:hover .project-title {
+            color: var(--secondary);
+            transition: color 0.3s ease;
+        }
+
+        .project-card:hover .tech-tag {
+            background: rgba(236, 72, 153, 0.2);
+            color: var(--secondary);
+            border-color: rgba(236, 72, 153, 0.3);
+            transition: all 0.3s ease;
         }
 
         .project-title {
@@ -571,6 +661,31 @@
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
+            backdrop-filter: blur(10px);
+            background: var(--card-bg);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 6s linear infinite;
+        }
+
+        .hero-content-inner {
+            position: relative;
+            z-index: 1;
         }
 
         .hero-title {
@@ -596,10 +711,22 @@
             gap: var(--spacing-2xl);
             margin-top: var(--spacing-xl);
             flex-wrap: wrap;
+            padding-top: var(--spacing-xl);
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
         }
 
         .stat-item {
             text-align: center;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            background: rgba(99, 102, 241, 0.05);
+            min-width: 120px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-5px);
         }
 
         .stat-number {
@@ -629,6 +756,32 @@
         }
 
         /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+
+            .name-card-name {
+                font-size: var(--font-size-3xl);
+            }
+
+            .hero-title {
+                font-size: var(--font-size-2xl);
+            }
+
+            .hero-stats {
+                gap: var(--spacing-lg);
+            }
+
+            .skills-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .projects-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
             :root {
                 --font-size-4xl: 2.5rem;
@@ -674,6 +827,37 @@
 
             section {
                 margin-bottom: var(--spacing-2xl);
+            }
+
+            .hero-content {
+                padding: var(--spacing-lg);
+            }
+
+            .hero-title {
+                font-size: var(--font-size-xl);
+            }
+
+            .hero-subtitle {
+                font-size: var(--font-size-md);
+            }
+
+            .hero-stats {
+                gap: var(--spacing-md);
+            }
+
+            .stat-item {
+                min-width: 100px;
+                padding: var(--spacing-sm);
+            }
+
+            .stat-number {
+                font-size: var(--font-size-xl);
+            }
+
+            .name-card-contact {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--spacing-sm);
             }
         }
 
@@ -736,6 +920,55 @@
             .contact-item {
                 font-size: var(--font-size-xs);
             }
+
+            .hero-content {
+                padding: var(--spacing-md);
+            }
+
+            .hero-title {
+                font-size: var(--font-size-lg);
+            }
+
+            .hero-subtitle {
+                font-size: var(--font-size-sm);
+            }
+
+            .stat-item {
+                min-width: 80px;
+                padding: var(--spacing-xs);
+            }
+
+            .stat-number {
+                font-size: var(--font-size-lg);
+            }
+
+            .stat-label {
+                font-size: var(--font-size-xs);
+            }
+
+            .skill-card {
+                padding: var(--spacing-md);
+            }
+
+            .skill-title {
+                font-size: var(--font-size-md);
+            }
+
+            .project-card {
+                padding: var(--spacing-md);
+            }
+
+            .project-title {
+                font-size: var(--font-size-lg);
+            }
+
+            .about-content {
+                padding: var(--spacing-lg);
+            }
+
+            .about-text {
+                font-size: var(--font-size-sm);
+            }
         }
     </style>
 </head>
@@ -785,6 +1018,13 @@
                             </svg>
                             <span>zhen666555-sketch</span>
                         </div>
+                        <div class="contact-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                            <a href="https://qiaod.github.io/DTL/" target="_blank" style="color: var(--text-secondary); text-decoration: none;">Deep Traffic Lab</a>
+                        </div>
                     </div>
                     <div class="social-links">
                         <a href="#" class="social-link">
@@ -833,20 +1073,22 @@
             <!-- Hero Section -->
             <section class="hero-section">
                 <div class="hero-content fade-in">
-                    <h2 class="hero-title">技术驱动创新</h2>
-                    <p class="hero-subtitle">专注于全栈开发，打造高性能、用户友好的软件产品</p>
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">年开发经验</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">20+</span>
-                            <span class="stat-label">完成项目</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">10+</span>
-                            <span class="stat-label">技术栈</span>
+                    <div class="hero-content-inner">
+                        <h2 class="hero-title">技术驱动创新</h2>
+                        <p class="hero-subtitle">专注于全栈开发，打造高性能、用户友好的软件产品</p>
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">5+</span>
+                                <span class="stat-label">年开发经验</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">20+</span>
+                                <span class="stat-label">完成项目</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">10+</span>
+                                <span class="stat-label">技术栈</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -856,12 +1098,14 @@
             <section id="about">
                 <h2 class="section-title fade-in">关于我</h2>
                 <div class="about-content fade-in">
-                    <p class="about-text">
-                        我是一名全栈开发工程师，具有丰富的跨平台开发经验，专注于移动应用和Web系统的设计与实现。
-                        我热衷于技术创新，善于解决复杂的技术问题，并始终保持对新技术的学习和探索。
-                        我的技术栈涵盖前端、后端、移动开发等多个领域，能够独立完成从需求分析到系统部署的全流程开发。
-                        我注重代码质量和用户体验，致力于打造高性能、高可靠性的软件产品。
-                    </p>
+                    <div class="about-content-inner">
+                        <p class="about-text">
+                            我是一名全栈开发工程师，具有丰富的跨平台开发经验，专注于移动应用和Web系统的设计与实现。
+                            我热衷于技术创新，善于解决复杂的技术问题，并始终保持对新技术的学习和探索。
+                            我的技术栈涵盖前端、后端、移动开发等多个领域，能够独立完成从需求分析到系统部署的全流程开发。
+                            我注重代码质量和用户体验，致力于打造高性能、高可靠性的软件产品。
+                        </p>
+                    </div>
                 </div>
             </section>
 
@@ -1013,11 +1257,15 @@
                 this.resize();
                 this.createParticles();
                 this.animate();
-                window.addEventListener('resize', () => this.resize());
-                window.addEventListener('mousemove', (e) => {
+                window.addEventListener('resize', () => {
+                    this.resize();
+                    this.particles = [];
+                    this.createParticles();
+                });
+                window.addEventListener('mousemove', throttle((e) => {
                     this.mouse.x = e.clientX;
                     this.mouse.y = e.clientY;
-                });
+                }, 50));
             }
 
             resize() {
@@ -1027,7 +1275,16 @@
 
             createParticles() {
                 // 根据屏幕尺寸调整粒子数量
-                const particleCount = window.innerWidth < 768 ? 50 : 80;
+                let particleCount;
+                if (window.innerWidth < 480) {
+                    particleCount = 30;
+                } else if (window.innerWidth < 768) {
+                    particleCount = 40;
+                } else if (window.innerWidth < 1024) {
+                    particleCount = 60;
+                } else {
+                    particleCount = 80;
+                }
                 for (let i = 0; i < particleCount; i++) {
                     this.particles.push({
                         x: Math.random() * this.canvas.width,
