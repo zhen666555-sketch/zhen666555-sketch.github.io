@@ -359,6 +359,35 @@
             transform: scale(1.2);
         }
 
+        .contact-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s var(--ease-out-expo);
+            position: relative;
+            padding: 6px 0;
+            display: inline-block;
+            min-height: 32px;
+        }
+
+        .contact-link:hover {
+            color: var(--primary-light);
+        }
+
+        .contact-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gradient-primary);
+            transition: width 0.3s var(--ease-out-expo);
+        }
+
+        .contact-link:hover::after {
+            width: 100%;
+        }
+
         h1 {
             font-size: var(--font-size-4xl);
             margin-bottom: var(--spacing-xs);
@@ -370,6 +399,7 @@
             background-clip: text;
             animation: gradientShift 4s ease-in-out infinite;
             background-size: 200% 200%;
+            line-height: 1.2;
         }
 
         @keyframes gradientShift {
@@ -397,6 +427,8 @@
             justify-content: center;
             width: 50px;
             height: 50px;
+            min-width: 50px;
+            min-height: 50px;
             border-radius: var(--radius-md);
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid var(--border-subtle);
@@ -530,7 +562,7 @@
             font-size: var(--font-size-sm);
             transition: all 0.4s var(--ease-out-expo);
             position: relative;
-            padding: var(--spacing-xs) var(--spacing-md);
+            padding: var(--spacing-sm) var(--spacing-md);
             border-radius: var(--radius-sm);
             overflow: hidden;
             z-index: 1;
@@ -538,7 +570,9 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 40px;
+            min-height: 44px;
+            min-width: 80px;
+            text-align: center;
         }
 
         .nav-link::before {
@@ -1192,6 +1226,20 @@
         /* ========================================
            响应式设计
            ======================================== */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+
+            .skills-container {
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            }
+
+            .projects-container {
+                grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            }
+        }
+
         @media (max-width: 1024px) {
             .container {
                 padding: 0 var(--spacing-md);
@@ -1310,12 +1358,24 @@
                 align-items: center;
                 gap: var(--spacing-sm);
             }
+
+            /* 社交链接响应式 */
+            .social-links {
+                gap: var(--spacing-md);
+            }
+
+            .social-link {
+                width: 48px;
+                height: 48px;
+            }
         }
 
         @media (max-width: 480px) {
             :root {
                 --font-size-4xl: 2rem;
                 --font-size-3xl: 1.75rem;
+                --font-size-2xl: 1.5rem;
+                --font-size-xl: 1.25rem;
             }
 
             .container {
@@ -1360,6 +1420,7 @@
 
             .name-card-description {
                 font-size: var(--font-size-sm);
+                line-height: 1.6;
             }
 
             .name-card-contact {
@@ -1382,6 +1443,7 @@
 
             .hero-subtitle {
                 font-size: var(--font-size-sm);
+                line-height: 1.6;
             }
 
             .stat-item {
@@ -1405,6 +1467,11 @@
                 font-size: var(--font-size-md);
             }
 
+            .skill-list li {
+                font-size: var(--font-size-xs);
+                line-height: 1.5;
+            }
+
             .project-card {
                 padding: var(--spacing-md);
             }
@@ -1413,11 +1480,28 @@
                 font-size: var(--font-size-lg);
             }
 
+            .project-description {
+                font-size: var(--font-size-xs);
+                line-height: 1.6;
+            }
+
+            .tech-tag {
+                padding: 4px 10px;
+                font-size: 10px;
+            }
+
             .about-content {
                 padding: var(--spacing-lg);
             }
 
             .about-text {
+                font-size: var(--font-size-sm);
+                line-height: 1.6;
+            }
+
+            /* 导航菜单响应式 */
+            .nav-link {
+                padding: var(--spacing-sm);
                 font-size: var(--font-size-sm);
             }
         }
@@ -1435,7 +1519,11 @@
         <header>
             <div class="name-card fade-in">
                 <div class="name-card-inner">
-                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cartoon%20style%20avatar%20of%20a%20software%20engineer%2C%20friendly%20looking%2C%20clean%20background%2C%20asian%20male&image_size=square" alt="曹泽祯" class="name-card-avatar">
+                    <picture>
+                        <source media="(max-width: 480px)" srcset="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cartoon%20style%20avatar%20of%20a%20software%20engineer%2C%20friendly%20looking%2C%20clean%20background%2C%20asian%20male&image_size=square" width="100" height="100">
+                        <source media="(max-width: 768px)" srcset="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cartoon%20style%20avatar%20of%20a%20software%20engineer%2C%20friendly%20looking%2C%20clean%20background%2C%20asian%20male&image_size=square" width="120" height="120">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cartoon%20style%20avatar%20of%20a%20software%20engineer%2C%20friendly%20looking%2C%20clean%20background%2C%20asian%20male&image_size=square" alt="曹泽祯" class="name-card-avatar" loading="lazy">
+                    </picture>
                     <h1 class="name-card-name">曹泽祯</h1>
                     <p class="name-card-title">全栈开发工程师 | 技术创新者</p>
                     <p class="name-card-description">
@@ -1447,55 +1535,55 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                             </svg>
-                            <span>+86 176****5746</span>
+                            <a href="tel:+8617652855746" class="contact-link" title="拨打电话">+86 176****5746</a>
                         </div>
                         <div class="contact-item">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                                 <polyline points="22,6 12,13 2,6"></polyline>
                             </svg>
-                            <span>zhen666555@gmail.com</span>
+                            <a href="mailto:zhen666555@gmail.com" class="contact-link" title="发送邮件">zhen666555@gmail.com</a>
                         </div>
                         <div class="contact-item">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                 <circle cx="12" cy="10" r="3"></circle>
                             </svg>
-                            <span>晋中市</span>
+                            <a href="https://maps.google.com/maps?q=晋中市" target="_blank" rel="noopener noreferrer" class="contact-link" title="在新窗口打开地图">晋中市</a>
                         </div>
                         <div class="contact-item">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                             </svg>
-                            <span>zhen666555-sketch</span>
+                            <a href="https://github.com/zhen666555-sketch" target="_blank" rel="noopener noreferrer" class="contact-link" title="在新窗口打开GitHub">zhen666555-sketch</a>
                         </div>
                         <div class="contact-item">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
                                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
                             </svg>
-                            <a href="https://qiaod.github.io/DTL/" target="_blank" style="color: var(--text-secondary); text-decoration: none;">Deep Traffic Lab</a>
+                            <a href="https://qiaod.github.io/DTL/" target="_blank" rel="noopener noreferrer" class="contact-link" title="在新窗口打开Deep Traffic Lab">Deep Traffic Lab</a>
                         </div>
                     </div>
                     <div class="social-links">
-                        <a href="#" class="social-link">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" title="在新窗口打开LinkedIn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                                 <rect x="2" y="9" width="4" height="12"></rect>
                                 <circle cx="4" cy="4" r="2"></circle>
                             </svg>
                         </a>
-                        <a href="#" class="social-link">
+                        <a href="https://github.com/zhen666555-sketch" target="_blank" rel="noopener noreferrer" class="social-link" title="在新窗口打开GitHub">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                             </svg>
                         </a>
-                        <a href="#" class="social-link">
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" title="在新窗口打开Twitter">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
                             </svg>
                         </a>
-                        <a href="#" class="social-link">
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" title="在新窗口打开Facebook">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                             </svg>
