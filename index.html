@@ -24,19 +24,16 @@
             --spacing-2xl: 64px;
             --spacing-3xl: 80px;
 
-            /* 科技色彩系统 - 精细化调整 */
-            /* 主色调：科技蓝 */
+            /* 科技色彩系统 */
             --primary: #0EA5E9;
             --primary-dark: #0284C7;
             --primary-light: #38BDF8;
             --primary-glow: rgba(14, 165, 233, 0.4);
 
-            /* 次要色：深空紫 */
             --secondary: #A855F7;
             --secondary-dark: #9333EA;
             --secondary-light: #C084FC;
 
-            /* 强调色：霓虹青 */
             --accent: #22D3EE;
             --accent-glow: rgba(34, 211, 238, 0.3);
 
@@ -75,7 +72,7 @@
             --radius-xl: 24px;
             --radius-full: 9999px;
 
-            /* 阴影系统 - 科技光晕 */
+            /* 阴影系统 */
             --shadow-sm: 0 4px 12px rgba(14, 165, 233, 0.08);
             --shadow-md: 0 8px 30px rgba(14, 165, 233, 0.12);
             --shadow-lg: 0 16px 50px rgba(14, 165, 233, 0.18);
@@ -109,7 +106,6 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* 粒子背景容器 */
         #particles-container {
             position: fixed;
             top: 0;
@@ -120,7 +116,6 @@
             pointer-events: none;
         }
 
-        /* 网格纹理叠加层 - 新增科技感网格背景 */
         body::before {
             content: '';
             position: fixed;
@@ -136,7 +131,6 @@
             z-index: 0;
         }
 
-        /* 鼠标跟随效果 - 科技光晕 */
         #cursor {
             position: fixed;
             width: 24px;
@@ -167,7 +161,6 @@
             transition: transform 0.3s var(--ease-out-expo), opacity 0.3s ease;
         }
 
-        /* 主容器 */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -204,7 +197,6 @@
             text-align: center;
         }
 
-        /* 多层光晕效果 */
         .name-card::before {
             content: '';
             position: absolute;
@@ -229,7 +221,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* 顶部渐变装饰线 */
         .name-card::after {
             content: '';
             position: absolute;
@@ -306,7 +297,6 @@
             background-clip: text;
             background-size: 200% 200%;
             animation: gradientShift 4s ease-in-out infinite;
-            text-shadow: 0 0 60px rgba(14, 165, 233, 0.3);
         }
 
         .name-card-title {
@@ -366,7 +356,6 @@
             position: relative;
             padding: 6px 0;
             display: inline-block;
-            min-height: 32px;
         }
 
         .contact-link:hover {
@@ -388,37 +377,16 @@
             width: 100%;
         }
 
-        h1 {
-            font-size: var(--font-size-4xl);
-            margin-bottom: var(--spacing-xs);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #fff 0%, var(--primary-light) 50%, var(--secondary-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 4s ease-in-out infinite;
-            background-size: 200% 200%;
-            line-height: 1.2;
-        }
-
         @keyframes gradientShift {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
-        }
-
-        .subtitle {
-            font-size: var(--font-size-lg);
-            color: var(--text-muted);
-            margin-bottom: var(--spacing-md);
-            font-weight: 400;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
             gap: var(--spacing-md);
-            margin-top: var(--spacing-lg);
+            margin-top: var(--spacing-md);
         }
 
         .social-link {
@@ -427,8 +395,6 @@
             justify-content: center;
             width: 50px;
             height: 50px;
-            min-width: 50px;
-            min-height: 50px;
             border-radius: var(--radius-md);
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid var(--border-subtle);
@@ -480,7 +446,7 @@
         }
 
         /* ========================================
-           导航栏 - 玻璃拟态设计
+           导航栏
            ======================================== */
         nav {
             position: sticky;
@@ -619,7 +585,6 @@
             width: 70%;
         }
 
-        /* 导航项选中状态 */
         .nav-link.active {
             color: var(--primary-light);
             background: rgba(14, 165, 233, 0.15);
@@ -630,13 +595,11 @@
             width: 70%;
         }
 
-        /* 导航项点击效果 */
         .nav-link:active {
             transform: translateY(0);
             background: rgba(14, 165, 233, 0.2);
         }
 
-        /* 移动端导航菜单按钮 */
         .nav-toggle {
             display: none;
             background: none;
@@ -692,328 +655,10 @@
         }
 
         /* ========================================
-           关于我区域
-           ======================================== */
-        .about-content {
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.7) 100%);
-            border-radius: var(--radius-xl);
-            padding: var(--spacing-xl);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-content::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 180deg at 50% 50%,
-                transparent 0deg,
-                rgba(14, 165, 233, 0.06) 90deg,
-                transparent 180deg);
-            animation: rotateGlow 15s linear infinite reverse;
-        }
-
-        .about-content::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 10%;
-            right: 10%;
-            height: 1px;
-            background: linear-gradient(90deg,
-                transparent 0%,
-                rgba(14, 165, 233, 0.4) 50%,
-                transparent 100%);
-        }
-
-        .about-content-inner {
-            position: relative;
-            z-index: 1;
-        }
-
-        .about-text {
-            font-size: var(--font-size-md);
-            line-height: 1.9;
-            color: var(--text-secondary);
-            font-weight: 400;
-        }
-
-        /* ========================================
-           技能卡片 - 科技感设计
-           ======================================== */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--spacing-lg);
-        }
-
-        .skill-card {
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            background: linear-gradient(145deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-lg);
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.5s var(--ease-out-expo);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* 卡片左上角装饰 */
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
-            transition: all 0.5s var(--ease-out-expo);
-        }
-
-        .skill-card:hover::before {
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.25) 0%, transparent 70%);
-        }
-
-        .skill-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--shadow-lg),
-                        0 0 40px rgba(14, 165, 233, 0.1);
-            border-color: var(--border-color);
-            background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%);
-        }
-
-        .skill-card:hover .skill-title {
-            background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .skill-title {
-            font-size: var(--font-size-lg);
-            margin-bottom: var(--spacing-md);
-            color: var(--primary);
-            font-weight: 600;
-            letter-spacing: 0.01em;
-            transition: all 0.4s var(--ease-out-expo);
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            margin-bottom: var(--spacing-sm);
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            font-size: var(--font-size-sm);
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .skill-list li:hover {
-            color: var(--primary-light);
-            transform: translateX(4px);
-        }
-
-        .skill-list li::before {
-            content: "";
-            width: 6px;
-            height: 6px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            margin-right: var(--spacing-sm);
-            flex-shrink: 0;
-            box-shadow: 0 0 8px var(--primary-glow);
-        }
-
-        /* ========================================
-           项目卡片 - 沉浸式设计
-           ======================================== */
-        .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--spacing-lg);
-        }
-
-        .project-card {
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            background: linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.7) 100%);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-lg);
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.5s var(--ease-out-expo);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* 项目卡片顶部装饰条 */
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
-        /* 卡片右侧光晕 */
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
-            transition: all 0.5s var(--ease-out-expo);
-            pointer-events: none;
-        }
-
-        .project-card:hover::after {
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--shadow-lg),
-                        0 0 50px rgba(14, 165, 233, 0.12);
-            border-color: var(--border-color);
-        }
-
-        .project-card:hover .project-title {
-            color: var(--primary-light);
-        }
-
-        .project-title {
-            font-size: var(--font-size-xl);
-            margin-bottom: var(--spacing-xs);
-            color: var(--primary);
-            font-weight: 600;
-            letter-spacing: 0.01em;
-            transition: color 0.4s var(--ease-out-expo);
-        }
-
-        .project-date {
-            font-size: var(--font-size-xs);
-            color: var(--text-muted);
-            margin-bottom: var(--spacing-md);
-            font-weight: 500;
-            letter-spacing: 0.05em;
-        }
-
-        .project-description {
-            font-size: var(--font-size-sm);
-            line-height: 1.7;
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--spacing-xs);
-        }
-
-        .tech-tag {
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(168, 85, 247, 0.1) 100%);
-            color: var(--primary-light);
-            padding: 6px 14px;
-            border-radius: var(--radius-full);
-            font-size: var(--font-size-xs);
-            border: 1px solid rgba(14, 165, 233, 0.25);
-            font-weight: 500;
-            transition: all 0.3s var(--ease-out-expo);
-        }
-
-        .tech-tag:hover {
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(168, 85, 247, 0.2) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
-        }
-
-        /* 项目成果 */
-        .project-achievements {
-            margin: var(--spacing-md) 0;
-            padding: var(--spacing-md);
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(168, 85, 247, 0.05) 100%);
-            border-radius: var(--radius-md);
-            border-left: 3px solid var(--primary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-achievements::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, rgba(14, 165, 233, 0.05) 0%, transparent 100%);
-        }
-
-        .achievement-title {
-            font-size: var(--font-size-sm);
-            color: var(--primary);
-            margin-bottom: var(--spacing-sm);
-            font-weight: 600;
-        }
-
-        .achievement-list {
-            list-style: none;
-            padding-left: var(--spacing-sm);
-            position: relative;
-            z-index: 1;
-        }
-
-        .achievement-list li {
-            margin-bottom: var(--spacing-xs);
-            color: var(--text-secondary);
-            font-size: var(--font-size-xs);
-            line-height: 1.6;
-            transition: color 0.3s ease;
-        }
-
-        .achievement-list li:hover {
-            color: var(--primary-light);
-        }
-
-        .achievement-list li::before {
-            content: "✓";
-            color: var(--accent);
-            font-weight: bold;
-            margin-right: var(--spacing-xs);
-            text-shadow: 0 0 8px var(--accent-glow);
-        }
-
-        /* ========================================
-           Hero Section - 首屏区域
+           Hero 统计区
            ======================================== */
         .hero-section {
-            padding: var(--spacing-3xl) 0;
+            padding: var(--spacing-xl) 0;
             text-align: center;
         }
 
@@ -1031,7 +676,6 @@
             overflow: hidden;
         }
 
-        /* Hero 背景光效 */
         .hero-content::before {
             content: '';
             position: absolute;
@@ -1168,6 +812,524 @@
         }
 
         /* ========================================
+           关于我区域
+           ======================================== */
+        .about-content {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.7) 100%);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 180deg at 50% 50%,
+                transparent 0deg,
+                rgba(14, 165, 233, 0.06) 90deg,
+                transparent 180deg);
+            animation: rotateGlow 15s linear infinite reverse;
+        }
+
+        .about-content::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(14, 165, 233, 0.4) 50%,
+                transparent 100%);
+        }
+
+        .about-content-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-text {
+            font-size: var(--font-size-md);
+            line-height: 1.9;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* 教育经历 */
+        .education-block {
+            margin-top: var(--spacing-lg);
+            padding: var(--spacing-md);
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(168, 85, 247, 0.05) 100%);
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--primary);
+        }
+
+        .education-title {
+            font-size: var(--font-size-sm);
+            color: var(--primary);
+            margin-bottom: var(--spacing-xs);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .education-detail {
+            font-size: var(--font-size-base);
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .education-meta {
+            font-size: var(--font-size-sm);
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ========================================
+           技能卡片
+           ======================================== */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .skill-card {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.5s var(--ease-out-expo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+            transition: all 0.5s var(--ease-out-expo);
+        }
+
+        .skill-card:hover::before {
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.25) 0%, transparent 70%);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-lg),
+                        0 0 40px rgba(14, 165, 233, 0.1);
+            border-color: var(--border-color);
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%);
+        }
+
+        .skill-title {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--spacing-md);
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            transition: all 0.4s var(--ease-out-expo);
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-card:hover .skill-title {
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .skill-list {
+            list-style: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-list li {
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            font-size: var(--font-size-sm);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .skill-list li:hover {
+            color: var(--primary-light);
+            transform: translateX(4px);
+        }
+
+        .skill-list li::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            margin-right: var(--spacing-sm);
+            flex-shrink: 0;
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+
+        /* ========================================
+           项目卡片
+           ======================================== */
+        .projects-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.7) 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.5s var(--ease-out-expo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
+            transition: all 0.5s var(--ease-out-expo);
+            pointer-events: none;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover::after {
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg),
+                        0 0 50px rgba(14, 165, 233, 0.12);
+            border-color: var(--border-color);
+        }
+
+        .project-header {
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-title {
+            font-size: var(--font-size-xl);
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            transition: color 0.4s var(--ease-out-expo);
+            margin-bottom: 2px;
+        }
+
+        .project-card:hover .project-title {
+            color: var(--primary-light);
+        }
+
+        .project-role {
+            font-size: var(--font-size-sm);
+            color: var(--secondary-light);
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .project-date {
+            font-size: var(--font-size-xs);
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        .project-description {
+            font-size: var(--font-size-sm);
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 项目子模块 */
+        .project-modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-module {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.06) 0%, rgba(168, 85, 247, 0.04) 100%);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-sm);
+            border: 1px solid rgba(14, 165, 233, 0.1);
+            transition: all 0.3s var(--ease-out-expo);
+        }
+
+        .project-module:hover {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.12) 0%, rgba(168, 85, 247, 0.08) 100%);
+            border-color: rgba(14, 165, 233, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .module-name {
+            font-size: var(--font-size-xs);
+            color: var(--primary-light);
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: 0.03em;
+        }
+
+        .module-desc {
+            font-size: var(--font-size-xs);
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* 优化亮点 */
+        .project-optimizations {
+            margin: var(--spacing-md) 0;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.05) 0%, rgba(14, 165, 233, 0.05) 100%);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(34, 211, 238, 0.12);
+            position: relative;
+            z-index: 1;
+        }
+
+        .optimization-title {
+            font-size: var(--font-size-xs);
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            letter-spacing: 0.03em;
+        }
+
+        .optimization-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 6px;
+        }
+
+        .optimization-list li {
+            font-size: var(--font-size-xs);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            padding-left: var(--spacing-sm);
+            position: relative;
+        }
+
+        .optimization-list li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        /* 项目成果 */
+        .project-achievements {
+            margin: var(--spacing-md) 0;
+            padding: var(--spacing-md);
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.08) 0%, rgba(168, 85, 247, 0.05) 100%);
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .project-achievements::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(14, 165, 233, 0.05) 0%, transparent 100%);
+        }
+
+        .achievement-title {
+            font-size: var(--font-size-sm);
+            color: var(--primary);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 600;
+        }
+
+        .achievement-list {
+            list-style: none;
+            padding-left: var(--spacing-sm);
+            position: relative;
+            z-index: 1;
+        }
+
+        .achievement-list li {
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-secondary);
+            font-size: var(--font-size-xs);
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .achievement-list li:hover {
+            color: var(--primary-light);
+        }
+
+        .achievement-list li::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: var(--spacing-xs);
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(168, 85, 247, 0.1) 100%);
+            color: var(--primary-light);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            border: 1px solid rgba(14, 165, 233, 0.25);
+            font-weight: 500;
+            transition: all 0.3s var(--ease-out-expo);
+        }
+
+        .tech-tag:hover {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(168, 85, 247, 0.2) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
+        }
+
+        /* ========================================
+           个人优势
+           ======================================== */
+        .strengths-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--spacing-lg);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .strength-card {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border-subtle);
+            text-align: center;
+            transition: all 0.5s var(--ease-out-expo);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .strength-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+            opacity: 0;
+            transition: all 0.4s var(--ease-out-expo);
+        }
+
+        .strength-card:hover::before {
+            opacity: 1;
+            width: 80%;
+        }
+
+        .strength-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg),
+                        0 0 40px rgba(14, 165, 233, 0.1);
+            border-color: var(--border-color);
+        }
+
+        .strength-icon {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-sm);
+            display: block;
+        }
+
+        .strength-name {
+            font-size: var(--font-size-md);
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .strength-desc {
+            font-size: var(--font-size-sm);
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ========================================
            页脚
            ======================================== */
         footer {
@@ -1232,11 +1394,7 @@
             }
 
             .skills-container {
-                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            }
-
-            .projects-container {
-                grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             }
         }
 
@@ -1258,11 +1416,11 @@
             }
 
             .skills-container {
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             }
 
-            .projects-container {
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            .project-modules {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
@@ -1276,11 +1434,6 @@
                 padding: var(--spacing-2xl) 0 var(--spacing-lg);
             }
 
-            .header-content {
-                padding: var(--spacing-lg);
-            }
-
-            /* 移动端导航菜单 */
             .nav-toggle {
                 display: block;
                 margin: 0 auto;
@@ -1321,6 +1474,18 @@
             }
 
             .skills-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .strengths-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .project-modules {
+                grid-template-columns: 1fr;
+            }
+
+            .optimization-list {
                 grid-template-columns: 1fr;
             }
 
@@ -1359,7 +1524,6 @@
                 gap: var(--spacing-sm);
             }
 
-            /* 社交链接响应式 */
             .social-links {
                 gap: var(--spacing-md);
             }
@@ -1382,8 +1546,12 @@
                 padding: 0 var(--spacing-sm);
             }
 
-            .header-content {
-                padding: var(--spacing-md);
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            .strengths-container {
+                grid-template-columns: 1fr;
             }
 
             .social-links {
@@ -1400,7 +1568,6 @@
                 height: 18px;
             }
 
-            /* 个人名字卡片响应式设计 */
             .name-card {
                 padding: var(--spacing-lg);
             }
@@ -1499,7 +1666,6 @@
                 line-height: 1.6;
             }
 
-            /* 导航菜单响应式 */
             .nav-link {
                 padding: var(--spacing-sm);
                 font-size: var(--font-size-sm);
@@ -1510,12 +1676,12 @@
 <body>
     <!-- 粒子背景容器 -->
     <div id="particles-container"></div>
-    
+
     <!-- 鼠标跟随效果 -->
     <div id="cursor"></div>
 
     <div class="container">
-        <!-- 头部 -->
+        <!-- 头部 - 个人名片 -->
         <header>
             <div class="name-card fade-in">
                 <div class="name-card-inner">
@@ -1525,10 +1691,10 @@
                         <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cartoon%20style%20avatar%20of%20a%20software%20engineer%2C%20friendly%20looking%2C%20clean%20background%2C%20asian%20male&image_size=square" alt="曹泽祯" class="name-card-avatar" loading="lazy">
                     </picture>
                     <h1 class="name-card-name">曹泽祯</h1>
-                    <p class="name-card-title">全栈开发工程师 | 技术创新者</p>
+                    <p class="name-card-title">全栈开发工程师 | 地理空间数据分析</p>
                     <p class="name-card-description">
-                        专注于移动应用和Web系统的设计与实现，具有丰富的跨平台开发经验。
-                        热衷于技术创新，善于解决复杂的技术问题，始终保持对新技术的学习和探索。
+                        专注于 Web 全栈开发与地理空间数据科学，具备从系统架构设计到核心算法实现的完整能力。
+                        善于将 AI 大模型技术落地为实际产品，对技术有持续的热情与探索精神。
                     </p>
                     <div class="name-card-contact">
                         <div class="contact-item">
@@ -1566,26 +1732,9 @@
                         </div>
                     </div>
                     <div class="social-links">
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" title="在新窗口打开LinkedIn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                                <rect x="2" y="9" width="4" height="12"></rect>
-                                <circle cx="4" cy="4" r="2"></circle>
-                            </svg>
-                        </a>
-                        <a href="https://github.com/zhen666555-sketch" target="_blank" rel="noopener noreferrer" class="social-link" title="在新窗口打开GitHub">
+                        <a href="https://github.com/zhen666555-sketch" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub 主页">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                            </svg>
-                        </a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" title="在新窗口打开Twitter">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-                            </svg>
-                        </a>
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" title="在新窗口打开Facebook">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                             </svg>
                         </a>
                     </div>
@@ -1605,10 +1754,10 @@
                         </svg>
                     </button>
                     <ul class="nav-links">
+                        <li><a href="#skills" class="nav-link">专业技能</a></li>
                         <li><a href="#about" class="nav-link">关于我</a></li>
-                        <li><a href="#skills" class="nav-link">技能</a></li>
                         <li><a href="#projects" class="nav-link">项目经历</a></li>
-                        <li><a href="#contact" class="nav-link">联系方式</a></li>
+                        <li><a href="#strengths" class="nav-link">个人优势</a></li>
                     </ul>
                 </div>
             </div>
@@ -1616,26 +1765,73 @@
 
         <!-- 主要内容 -->
         <main>
-            <!-- Hero Section -->
+            <!-- Hero 统计区 -->
             <section class="hero-section">
                 <div class="hero-content fade-in">
                     <div class="hero-content-inner">
-                        <h2 class="hero-title">技术驱动创新</h2>
-                        <p class="hero-subtitle">专注于全栈开发，打造高性能、用户友好的软件产品</p>
+                        <h2 class="hero-title">用技术解决真实问题</h2>
+                        <p class="hero-subtitle">从地理空间分析到知识图谱，从 AI 应用到全栈工程——始终保持对技术本质的追求</p>
                         <div class="hero-stats">
                             <div class="stat-item">
-                                <span class="stat-number">5+</span>
-                                <span class="stat-label">年开发经验</span>
+                                <span class="stat-number">6+</span>
+                                <span class="stat-label">项目经历</span>
                             </div>
                             <div class="stat-item">
-                                <span class="stat-number">20+</span>
-                                <span class="stat-label">完成项目</span>
+                                <span class="stat-number">5</span>
+                                <span class="stat-label">技术领域</span>
                             </div>
                             <div class="stat-item">
-                                <span class="stat-number">10+</span>
-                                <span class="stat-label">技术栈</span>
+                                <span class="stat-number">3000万+</span>
+                                <span class="stat-label">数据处理规模</span>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 专业技能 -->
+            <section id="skills">
+                <h2 class="section-title fade-in">专业技能</h2>
+                <div class="skills-container">
+                    <div class="skill-card fade-in">
+                        <h3 class="skill-title">前端开发</h3>
+                        <ul class="skill-list">
+                            <li>HTML5 / CSS3 / JavaScript (ES6+)</li>
+                            <li>微信小程序原生开发</li>
+                            <li>HarmonyOS ArkUI / ArkTS</li>
+                            <li>响应式设计与弹性布局</li>
+                            <li>ZanUI-WeApp / wxParse</li>
+                        </ul>
+                    </div>
+                    <div class="skill-card fade-in">
+                        <h3 class="skill-title">后端开发</h3>
+                        <ul class="skill-list">
+                            <li>Python / Flask 框架</li>
+                            <li>RESTful API 设计与开发</li>
+                            <li>Neo4j 图数据库 / MongoDB</li>
+                            <li>微信云开发 / 云函数</li>
+                            <li>JWT 认证与安全防护</li>
+                        </ul>
+                    </div>
+                    <div class="skill-card fade-in">
+                        <h3 class="skill-title">数据科学与 GIS</h3>
+                        <ul class="skill-list">
+                            <li>GeoPandas / Shapely 空间分析</li>
+                            <li>NetworkX 图论与网络分析</li>
+                            <li>Pandas / NumPy 数据处理</li>
+                            <li>XGBoost / OLS / Loess 建模</li>
+                            <li>大规模轨迹数据清洗</li>
+                        </ul>
+                    </div>
+                    <div class="skill-card fade-in">
+                        <h3 class="skill-title">AI / LLM 工程</h3>
+                        <ul class="skill-list">
+                            <li>RAG 检索增强生成技术</li>
+                            <li>FAISS 向量检索引擎</li>
+                            <li>DeepSeek API 集成与调优</li>
+                            <li>提示词工程与压缩</li>
+                            <li>知识图谱构建与推理</li>
+                        </ul>
                     </div>
                 </div>
             </section>
@@ -1646,58 +1842,16 @@
                 <div class="about-content fade-in">
                     <div class="about-content-inner">
                         <p class="about-text">
-                            我是一名全栈开发工程师，具有丰富的跨平台开发经验，专注于移动应用和Web系统的设计与实现。
-                            我热衷于技术创新，善于解决复杂的技术问题，并始终保持对新技术的学习和探索。
-                            我的技术栈涵盖前端、后端、移动开发等多个领域，能够独立完成从需求分析到系统部署的全流程开发。
-                            我注重代码质量和用户体验，致力于打造高性能、高可靠性的软件产品。
+                            我是一名全栈开发工程师，技术视野覆盖前端、后端、数据科学和 AI 工程多个领域。
+                            我享受从零到一构建系统的过程——无论是设计空间分析算法处理千万级轨迹数据，
+                            还是基于 RAG 技术打造医疗知识图谱问答系统，每个项目都让我对「技术如何创造价值」有更深的理解。
+                            我相信好的工程师不仅要能写代码，更要能独立分析问题、设计架构方案、并持续优化到极致。
                         </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 技能 -->
-            <section id="skills">
-                <h2 class="section-title fade-in">技能</h2>
-                <div class="skills-container">
-                    <div class="skill-card fade-in">
-                        <h3 class="skill-title">前端开发</h3>
-                        <ul class="skill-list">
-                            <li>HTML5 / CSS3 / JavaScript</li>
-                            <li>HarmonyOS SDK / ArkTS / ArkUI</li>
-                            <li>微信小程序开发</li>
-                            <li>响应式设计</li>
-                            <li>UI/UX设计</li>
-                        </ul>
-                    </div>
-                    <div class="skill-card fade-in">
-                        <h3 class="skill-title">后端开发</h3>
-                        <ul class="skill-list">
-                            <li>Python / Flask</li>
-                            <li>Node.js</li>
-                            <li>RESTful API设计</li>
-                            <li>微信云开发</li>
-                            <li>数据库设计</li>
-                        </ul>
-                    </div>
-                    <div class="skill-card fade-in">
-                        <h3 class="skill-title">数据科学</h3>
-                        <ul class="skill-list">
-                            <li>Python数据分析</li>
-                            <li>Pandas / NumPy</li>
-                            <li>GeoPandas / Shapely</li>
-                            <li>XGBoost机器学习</li>
-                            <li>数据可视化</li>
-                        </ul>
-                    </div>
-                    <div class="skill-card fade-in">
-                        <h3 class="skill-title">其他技能</h3>
-                        <ul class="skill-list">
-                            <li>AI大模型集成</li>
-                            <li>系统架构设计</li>
-                            <li>性能优化</li>
-                            <li>代码审查</li>
-                            <li>项目管理</li>
-                        </ul>
+                        <div class="education-block">
+                            <div class="education-title">教育经历</div>
+                            <div class="education-detail">吕梁学院 · 本科</div>
+                            <div class="education-meta">计算机科学与技术方向</div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1706,83 +1860,298 @@
             <section id="projects">
                 <h2 class="section-title fade-in">项目经历</h2>
                 <div class="projects-container">
+
+                    <!-- 项目1：共享单车-地铁多模式出行分析 -->
                     <div class="project-card fade-in">
-                        <h3 class="project-title">深圳市共享单车分析系统</h3>
-                        <p class="project-date">2026年4月</p>
+                        <div class="project-header">
+                            <h3 class="project-title">深圳市共享单车-地铁多模式出行驱动机制分析系统</h3>
+                            <p class="project-role">后端架构负责人</p>
+                            <p class="project-date">2026.03 - 2026.05</p>
+                        </div>
                         <p class="project-description">
-                            项目负责人/核心开发者，设计并实现了基于空间缓冲区的轨迹筛选算法，构建了地铁站点、线路与周边POI的空间关联模型，实现了多源数据的清洗、融合与分析。
+                            开发基于 Web 的地理空间数据分析平台，针对深圳市共享单车与地铁的协同出行问题，
+                            从空间、时间、网络、用户四个维度构建多模式出行分析体系，为城市交通规划提供量化决策支持。
                         </p>
+                        <div class="project-modules">
+                            <div class="project-module">
+                                <div class="module-name">空间分析模块</div>
+                                <div class="module-desc">基于 GeoPandas + Shapely 实现缓冲区分析与空间连接；提出"环形缓冲区+步行缓冲区"双层筛选模型精准识别接驳轨迹</div>
+                            </div>
+                            <div class="project-module">
+                                <div class="module-name">网络分析模块</div>
+                                <div class="module-desc">使用 NetworkX 构建地铁网络图，实现度中心性、介数中心性、接近中心性等指标计算；开发换乘站自动合并算法</div>
+                            </div>
+                            <div class="project-module">
+                                <div class="module-name">数据处理模块</div>
+                                <div class="module-desc">设计智能数据清洗流程，支持 3000 万条轨迹数据高效处理；采用分位数方法自动计算服务水平阈值</div>
+                            </div>
+                            <div class="project-module">
+                                <div class="module-name">智能分析模块</div>
+                                <div class="module-desc">集成 OLS、XGBoost、Loess 多种回归模型；实现动态提示词工程调用 DeepSeek 生成智能分析报告</div>
+                            </div>
+                        </div>
+                        <div class="project-optimizations">
+                            <div class="optimization-title">性能优化</div>
+                            <ul class="optimization-list">
+                                <li>智能缓存机制：将 3000 万条轨迹数据加载速度提升 60%</li>
+                                <li>跨页面数据同步：基于 LocalStorage 实现数据状态保持</li>
+                            </ul>
+                        </div>
                         <div class="project-achievements">
                             <h4 class="achievement-title">项目成果</h4>
                             <ul class="achievement-list">
-                                <li>已申请软件著作权</li>
+                                <li>生成 200+ 站点可达性分析报告，产出 8 个结构化分析结果文件</li>
+                                <li>处理速度较优化前提升 40%，数据准确率提高至 95% 以上</li>
                             </ul>
                         </div>
                         <div class="project-tech">
                             <span class="tech-tag">Python</span>
                             <span class="tech-tag">Flask</span>
-                            <span class="tech-tag">Pandas</span>
                             <span class="tech-tag">GeoPandas</span>
+                            <span class="tech-tag">NetworkX</span>
                             <span class="tech-tag">XGBoost</span>
+                            <span class="tech-tag">DeepSeek API</span>
+                            <span class="tech-tag">Bootstrap 5</span>
+                            <span class="tech-tag">Chart.js</span>
                         </div>
                     </div>
+
+                    <!-- 项目2：静脉输液知识图谱系统 -->
                     <div class="project-card fade-in">
-                        <h3 class="project-title">知行法鉴 - 专业交通法律咨询AI小程序</h3>
-                        <p class="project-date">2025年10月</p>
-                        <p class="project-description">
-                            主导开发了一款基于微信小程序平台的智能交通法律咨询应用，利用AI大模型技术为用户提供7×24小时的免费交通法律咨询服务。
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">微信小程序</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">微信云开发</span>
-                            <span class="tech-tag">deep seek</span>
-                            <span class="tech-tag">AI大模型</span>
+                        <div class="project-header">
+                            <h3 class="project-title">静脉输液治疗领域知识图谱系统</h3>
+                            <p class="project-role">全栈开发工程师（核心模块负责人）</p>
+                            <p class="project-date">2025</p>
                         </div>
-                    </div>
-                    <div class="project-card fade-in">
-                        <h3 class="project-title">HarmonyOS社区物业管理应用</h3>
-                        <p class="project-date">2025.05月</p>
                         <p class="project-description">
-                            主导开发了一款基于HarmonyOS的社区物业管理移动应用，集成了物业服务、社区社交、便民集市三大核心模块，为用户提供一站式智慧社区解决方案。
+                            面向静脉输液治疗的智能知识图谱系统，整合临床指南、专家共识、操作规范等多源医疗知识，
+                            通过 RAG（检索增强生成）技术为医护人员提供精准的临床决策支持与智能问答服务。
                         </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HarmonyOS SDK</span>
-                            <span class="tech-tag">ArkTS</span>
-                            <span class="tech-tag">ArkUI</span>
-                            <span class="tech-tag">RESTful API</span>
-                            <span class="tech-tag">AppStorage</span>
+                        <div class="project-modules">
+                            <div class="project-module">
+                                <div class="module-name">知识图谱模块</div>
+                                <div class="module-desc">基于 Neo4j 构建医疗知识图谱，实现实体关系建模与语义检索；设计增量更新机制，支持 50+ 文档批量导入</div>
+                            </div>
+                            <div class="project-module">
+                                <div class="module-name">RAG 检索引擎</div>
+                                <div class="module-desc">主导设计核心 RAG 引擎；开发并行检索器支持 FAISS 向量检索、关键词检索、图谱检索并发执行</div>
+                            </div>
+                            <div class="project-module">
+                                <div class="module-name">系统架构</div>
+                                <div class="module-desc">基于 Flask + Neo4j + MongoDB 全栈架构；8 大核心模块；LLM 客户端连接池、限流与熔断降级机制</div>
+                            </div>
+                            <div class="project-module">
+                                <div class="module-name">安全可靠性</div>
+                                <div class="module-desc">XSS 防护中间件（UAT-055 漏洞修复）；全局错误处理体系覆盖业务异常、验证错误、认证失败等场景</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="project-card fade-in">
-                        <h3 class="project-title">超市网购微信小程序</h3>
-                        <p class="project-date">2025年1月</p>
-                        <p class="project-description">
-                            参与开发一款超市网购类微信小程序，为用户提供完整的线上购物体验，包含商品浏览、分类检索、购物车管理、订单处理、用户中心等核心功能模块。
-                        </p>
+                        <div class="project-optimizations">
+                            <div class="optimization-title">性能优化</div>
+                            <ul class="optimization-list">
+                                <li>多级缓存系统（L1+L2+L3），LRU + TTL 策略，缓存命中率 37.5%</li>
+                                <li>并行检索架构：平均检索加速比 2.3 倍，响应时间 &lt;500ms</li>
+                            </ul>
+                        </div>
                         <div class="project-achievements">
                             <h4 class="achievement-title">项目成果</h4>
                             <ul class="achievement-list">
-                                <li>获得全国大学生计算机设计大赛 国家级三等奖</li>
+                                <li>支持 100+ 文档批量导入，核心功能可用率 99.9%</li>
+                                <li>输出完整 OpenAPI 规范文档与性能测试报告，形成可复用的医疗领域 RAG 解决方案</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">Neo4j</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">FAISS</span>
+                            <span class="tech-tag">DeepSeek API</span>
+                            <span class="tech-tag">RAG</span>
+                            <span class="tech-tag">JWT</span>
+                        </div>
+                    </div>
+
+                    <!-- 项目3：知行法鉴 -->
+                    <div class="project-card fade-in">
+                        <div class="project-header">
+                            <h3 class="project-title">知行法鉴 — 交通法律咨询 AI 小程序</h3>
+                            <p class="project-role">独立全栈开发</p>
+                            <p class="project-date">2025.10</p>
+                        </div>
+                        <p class="project-description">
+                            基于微信云开发平台独立开发的智能交通法律咨询小程序，集成 DeepSeek 大语言模型，
+                            为用户提供 7×24 小时免费法律咨询服务，实现事故责任划分、法律条款解读、处理建议等核心功能。
+                        </p>
+                        <div class="project-modules">
+                            <div class="project-module">
+                                <div class="module-name">后端云函数</div>
+                                <div class="module-desc">设计 API 云函数处理请求；封装 DeepSeek 接口调用完整链路；多层降级策略确保 AI 服务不可用时自动切换本地响应</div>
+                            </div>
+                            <div class="project-module">
+                                <div class="module-name">前端智能交互</div>
+                                <div class="module-desc">打字机逐字显示效果；智能滚动系统自动定位分析结果；云环境自动检测支持离线模式切换</div>
+                            </div>
+                            <div class="project-module">
+                                <div class="module-name">AI 提示词工程</div>
+                                <div class="module-desc">结构化解析技术将 AI 回复自动转换为「案件分析-责任划分-参考判罚」模块；支持图片上传与识别</div>
+                            </div>
+                        </div>
+                        <div class="project-optimizations">
+                            <div class="optimization-title">性能优化（针对云函数 3 秒超时限制）</div>
+                            <ul class="optimization-list">
+                                <li>提示词从 2000 token 压缩至 800 token，响应速度提升 60%</li>
+                                <li>上下文精简：Token 消耗减少 70%</li>
+                                <li>异步请求策略：规避超时限制，配合 20 秒超时+重试</li>
+                            </ul>
+                        </div>
+                        <div class="project-achievements">
+                            <h4 class="achievement-title">项目成果</h4>
+                            <ul class="achievement-list">
+                                <li>成功上线并稳定运行，API 响应时间优化至 5-15 秒</li>
+                                <li>服务可用性达 99.9%，错误率控制在 0.1% 以内</li>
                             </ul>
                         </div>
                         <div class="project-tech">
                             <span class="tech-tag">微信小程序</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">WXML/WXSS</span>
-                            <span class="tech-tag">zanui-weapp</span>
-                            <span class="tech-tag">API接口</span>
+                            <span class="tech-tag">微信云开发</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">DeepSeek API</span>
+                            <span class="tech-tag">提示词工程</span>
                         </div>
+                    </div>
+
+                    <!-- 项目4：超市网购小程序 -->
+                    <div class="project-card fade-in">
+                        <div class="project-header">
+                            <h3 class="project-title">超市网购微信小程序</h3>
+                            <p class="project-role">前端开发工程师</p>
+                            <p class="project-date">2025.01</p>
+                        </div>
+                        <p class="project-description">
+                            为校园超市打造轻量化线上购物平台，开发覆盖商品浏览、购物车管理、在线支付、用户中心等完整购物流程的微信小程序。
+                        </p>
+                        <div class="project-modules">
+                            <div class="project-module">
+                                <div class="module-name">首页与商品模块</div>
+                                <div class="module-desc">轮播图、商品分类、热门展示；集成 wxParse 二次封装解决 HTML 富文本兼容；商品规格选择、图片预览与分享</div>
+                            </div>
+                            <div class="project-module">
+                                <div class="module-name">购物车模块</div>
+                                <div class="module-desc">商品增删改查、全选/单选、动态价格计算；本地缓存与服务端同步策略解决多端数据一致性</div>
+                            </div>
+                            <div class="project-module">
+                                <div class="module-name">用户中心模块</div>
+                                <div class="module-desc">地址管理、商品收藏、浏览足迹、订单列表；微信授权登录、注册、密码重置完整认证流程</div>
+                            </div>
+                        </div>
+                        <div class="project-optimizations">
+                            <div class="optimization-title">性能优化</div>
+                            <ul class="optimization-list">
+                                <li>首屏优化：图片懒加载+请求合并+按需渲染，首屏时间从 2.8s 降至 1.2s（提升 57%）</li>
+                                <li>组件复用：商品卡片、订单列表等抽象为可复用组件，复用率达 40%</li>
+                            </ul>
+                        </div>
+                        <div class="project-achievements">
+                            <h4 class="achievement-title">项目成果</h4>
+                            <ul class="achievement-list">
+                                <li>全国大学生计算机设计大赛 国家级三等奖</li>
+                                <li>交互响应时间 &lt;200ms，页面流畅度评分 92 分</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">微信小程序</span>
+                            <span class="tech-tag">JavaScript ES6+</span>
+                            <span class="tech-tag">ZanUI-WeApp</span>
+                            <span class="tech-tag">wxParse</span>
+                        </div>
+                    </div>
+
+                    <!-- 项目5：智慧社区服务平台 -->
+                    <div class="project-card fade-in">
+                        <div class="project-header">
+                            <h3 class="project-title">智慧社区服务平台</h3>
+                            <p class="project-role">前端技术负责人</p>
+                            <p class="project-date">2025.05</p>
+                        </div>
+                        <p class="project-description">
+                            基于 HarmonyOS 构建的一站式智慧社区服务平台，集成物业服务、社区社交、便民生活三大核心模块，
+                            覆盖门禁管理、在线缴费、报修报事、邻里互动、快递代收等 20 余项功能。
+                        </p>
+                        <div class="project-modules">
+                            <div class="project-module">
+                                <div class="module-name">物业服务模块</div>
+                                <div class="module-desc">门禁管理、在线缴费、报修报事完整业务流程；统一网络请求工具类封装 RESTful API 与 Token 认证</div>
+                            </div>
+                            <div class="project-module">
+                                <div class="module-name">社区互动模块</div>
+                                <div class="module-desc">邻里动态、社区活动、二手集市；自定义 TabBar 组件解决底部导航栏状态联动问题</div>
+                            </div>
+                            <div class="project-module">
+                                <div class="module-name">生活服务模块</div>
+                                <div class="module-desc">快递代收、家政清洁、养老护理、智能充电等 8 项便民服务入口；ArkUI 声明式框架适配多终端</div>
+                            </div>
+                        </div>
+                        <div class="project-optimizations">
+                            <div class="optimization-title">性能优化</div>
+                            <ul class="optimization-list">
+                                <li>组件化拆分按需加载，首屏渲染缩短至 2s 以内</li>
+                                <li>图片懒加载与压缩：页面加载速度提升约 40%</li>
+                                <li>状态管理优化：交互响应速度提升 30%；解决内存泄漏，稳定性提升 30%</li>
+                            </ul>
+                        </div>
+                        <div class="project-achievements">
+                            <h4 class="achievement-title">项目成果</h4>
+                            <ul class="achievement-list">
+                                <li>独立完成 15+ 核心页面开发，涵盖物业、社区、集市、个人中心四大模块</li>
+                                <li>制定团队编码规范，通过代码审查将线上 Bug 率降低 25%</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">HarmonyOS 4.0</span>
+                            <span class="tech-tag">ArkUI</span>
+                            <span class="tech-tag">ArkTS</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">RESTful API</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 个人优势 -->
+            <section id="strengths">
+                <h2 class="section-title fade-in">个人优势</h2>
+                <div class="strengths-container">
+                    <div class="strength-card fade-in">
+                        <span class="strength-icon">&#x1F9E9;</span>
+                        <h3 class="strength-name">技术广度与深度兼备</h3>
+                        <p class="strength-desc">从前端到后端，从空间数据科学到 AI 大模型工程，能在多个技术栈之间自如切换并深入核心</p>
+                    </div>
+                    <div class="strength-card fade-in">
+                        <span class="strength-icon">&#x1F9E0;</span>
+                        <h3 class="strength-name">独立分析与解决问题</h3>
+                        <p class="strength-desc">面对云函数超时、大规模数据性能瓶颈等挑战，能够独立分析根因并提出创新解决方案</p>
+                    </div>
+                    <div class="strength-card fade-in">
+                        <span class="strength-icon">&#x1F4CA;</span>
+                        <h3 class="strength-name">数据驱动的工程思维</h3>
+                        <p class="strength-desc">以量化指标衡量优化效果，用数据验证技术决策，追求可测量、可复现的工程成果</p>
+                    </div>
+                    <div class="strength-card fade-in">
+                        <span class="strength-icon">&#x1F680;</span>
+                        <h3 class="strength-name">快速学习与技术迁移</h3>
+                        <p class="strength-desc">从 HarmonyOS 到 Neo4j 图数据库，能够快速掌握新技术栈并将其落地到实际项目中</p>
                     </div>
                 </div>
             </section>
+
         </main>
 
         <!-- 页脚 -->
         <footer id="contact">
             <div class="footer-content">
                 <p>© 2026 曹泽祯. All rights reserved.</p>
-                <p>全栈开发工程师 | 技术创新者</p>
+                <p>全栈开发工程师 | 地理空间数据分析 | 持续构建中</p>
             </div>
         </footer>
     </div>
@@ -1820,7 +2189,6 @@
             }
 
             createParticles() {
-                // 根据屏幕尺寸调整粒子数量
                 let particleCount;
                 if (window.innerWidth < 480) {
                     particleCount = 30;
@@ -1845,29 +2213,24 @@
 
             animate() {
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                
+
                 for (let i = 0; i < this.particles.length; i++) {
                     const p = this.particles[i];
-                    
-                    // 绘制粒子
                     this.ctx.beginPath();
                     this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                     this.ctx.fillStyle = p.color;
                     this.ctx.fill();
-                    
-                    // 更新粒子位置
+
                     p.x += p.speedX;
                     p.y += p.speedY;
-                    
-                    // 边界检测
+
                     if (p.x < 0 || p.x > this.canvas.width) p.speedX *= -1;
                     if (p.y < 0 || p.y > this.canvas.height) p.speedY *= -1;
-                    
-                    // 鼠标交互
+
                     const dx = this.mouse.x - p.x;
                     const dy = this.mouse.y - p.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    
+
                     if (distance < 100) {
                         const forceDirectionX = dx / distance;
                         const forceDirectionY = dy / distance;
@@ -1875,14 +2238,13 @@
                         p.x -= forceDirectionX * force * 2;
                         p.y -= forceDirectionY * force * 2;
                     }
-                    
-                    // 连接粒子
+
                     for (let j = i; j < this.particles.length; j++) {
                         const p2 = this.particles[j];
                         const dx2 = p.x - p2.x;
                         const dy2 = p.y - p2.y;
                         const distance2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-                        
+
                         if (distance2 < 100) {
                             this.ctx.beginPath();
                             this.ctx.strokeStyle = `rgba(14, 165, 233, ${0.25 * (1 - distance2 / 100)})`;
@@ -1893,7 +2255,7 @@
                         }
                     }
                 }
-                
+
                 requestAnimationFrame(() => this.animate());
             }
         }
@@ -1911,7 +2273,6 @@
                     this.cursor.style.top = e.clientY - 10 + 'px';
                 });
 
-                // 鼠标悬停效果
                 const links = document.querySelectorAll('a, .nav-link, .social-link');
                 links.forEach(link => {
                     link.addEventListener('mouseenter', () => {
@@ -1960,12 +2321,11 @@
             // 导航菜单切换
             const navToggle = document.querySelector('.nav-toggle');
             const navLinks = document.querySelector('.nav-links');
-            
+
             if (navToggle && navLinks) {
                 navToggle.addEventListener('click', () => {
                     navLinks.classList.toggle('active');
-                    
-                    // 切换图标
+
                     const svg = navToggle.querySelector('svg');
                     if (navLinks.classList.contains('active')) {
                         svg.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>';
@@ -1976,20 +2336,19 @@
             }
 
             // 导航项激活状态
-            const sections = document.querySelectorAll('section');
+            const sections = document.querySelectorAll('section[id]');
             const navItems = document.querySelectorAll('.nav-link');
-            
+
             const updateActiveNav = throttle(() => {
                 let current = '';
-                
+
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
                     if (pageYOffset >= sectionTop - 200) {
                         current = section.getAttribute('id');
                     }
                 });
-                
+
                 navItems.forEach(item => {
                     item.classList.remove('active');
                     if (item.getAttribute('href').substring(1) === current) {
@@ -2002,8 +2361,7 @@
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
-                    // 关闭移动端菜单
+
                     if (navLinks) {
                         navLinks.classList.remove('active');
                         if (navToggle) {
@@ -2011,7 +2369,7 @@
                             svg.innerHTML = '<line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>';
                         }
                     }
-                    
+
                     const target = document.querySelector(this.getAttribute('href'));
                     if (target) {
                         target.scrollIntoView({
