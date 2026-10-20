@@ -1,0 +1,74 @@
+{
+  "status": "implemented_direction_a",
+  "date": "2026-10-20",
+  "destination": "../index.html",
+  "scope": "用户已选 A 深空指挥舱，正式主页已重做，强化动态星场、三维网络球、轨道数据流、流星与鼠标视差。",
+  "directions": [
+    {
+      "id": "A",
+      "name": "深空指挥舱",
+      "colors": [
+        "#030914",
+        "#0b1d32",
+        "#42e8f4",
+        "#eaf8ff",
+        "#7485ff"
+      ],
+      "type": "中文无衬线大标题 / 精简等宽技术注释",
+      "layout": "左侧姓名与主张，右侧大型神经球体，向下进入项目档案与实习时间线。",
+      "principle": "把跨界面、服务端、数据与 AI 的工程连接能力变成中心轨道视觉。",
+      "motion": "轨道缓慢旋转；交互时显示技术节点，遵守减少动态效果设置。"
+    },
+    {
+      "id": "B",
+      "name": "黑客工作站",
+      "colors": [
+        "#090d0d",
+        "#88e9b1",
+        "#e8b66e",
+        "#e5ebe5",
+        "#26342e"
+      ],
+      "type": "等宽英文 / 易读中文黑体",
+      "layout": "文件树与标签页围绕主要内容，首屏个人介绍，下方以终端日志呈现工作经历。",
+      "principle": "用开发环境的交互语言组织真实项目，不伪造系统监控或贡献统计。",
+      "motion": "短启动呈现；文件夹切换和命令按钮均提供普通点击方式。"
+    },
+    {
+      "id": "C",
+      "name": "轨道实验室",
+      "colors": [
+        "#f2f6fa",
+        "#d7e0e9",
+        "#244bff",
+        "#122034",
+        "#52cce3"
+      ],
+      "type": "大字号几何英文 / 清晰中文无衬线",
+      "layout": "大留白双栏首屏，右侧金属计算核心，项目以工程目录方式展示。",
+      "principle": "以银白工业材质和蓝图语言表现极客感，避免与常见暗色作品集同质。",
+      "motion": "鼠标轻微视差；移动端使用静态资产。"
+    }
+  ],
+  "review": "三套方案以同一份真实经历为内容基础，分别在宇宙轨道、代码编辑器和工业蓝图上建立视觉特征。首屏使用实物感主视觉，正文保持阅读优先。所有方案均需响应式、键盘焦点和 reduced-motion 支持。",
+  "generation": {
+    "mode": "built-in image_gen",
+    "prompts": [
+      {
+        "key": "a-deep-space",
+        "name": "深空指挥舱",
+        "prompt": "Use case: ui-mockup.\nCreate a polished high-fidelity desktop personal portfolio WEBSITE SCREENSHOT, landscape 1536x1024 composition, single website only, no device mockup, no browser chrome, no presentation border. A deliberately ambitious geeky sci-fi mission-control visual identity for Chinese full stack developer 曹泽祯, alias ZHEN. THIS IS A REAL DEVELOPER PORTFOLIO, all displayed content must relate to the supplied projects; no fabricated metrics, awards, job titles, revenue, activity counts, or system telemetry pretending to be real.\nDirection A: Deep space command deck. Palette midnight #030914, navy #0b1d32, electric cyan #42e8f4, ice #eaf8ff, restrained periwinkle #7485ff. Spectacular central-right luminous three-dimensional glass neural sphere made of layered orbital arcs and delicate graph nodes, with subtle starfield. Treat the orb as a beautiful abstract visual, not a claimed product screenshot. Crisp futuristic but legible type, oversized beautiful Chinese headline left. Precise thin cyan brackets, restrained glass layering, expansive editorial spacing; not a generic SaaS card grid. Nav top brand 'ZHEN / 曹泽祯', links '项目' '经历' '技术' '联系', small GitHub button. Hero left small '曹泽祯 · 全栈开发工程师', enormous headline exactly '把想法，' next line '构建成真实系统。' Supporting text '微信小程序 / Java / Node.js / Python' and '连接业务、数据与 AI，把每一层都做扎实。' Two clear buttons '探索项目' and '工作经历'. Under hero a fine technology strip 'Spring Boot   Node.js   MySQL   Neo4j   ArkTS   XGBoost'. Bottom visible beginning of project section titled '构建记录' with horizontal previews of '龙庆峡 / 文旅票务平台' and '野一下 / 户外活动平台', fine schematic imagery, Java + Spring Boot and Node.js + MySQL respective stack labels. Large orb should dominate 45% screen, quiet dark backdrop with readable real web content. Impeccably art directed, exceptionally sharp interface detail, generous margins, strong asymmetrical composition. No cyberpunk city, no person, no robot, no fake dashboards of arbitrary numbers, no watermarks. Exact Chinese text as supplied."
+      },
+      {
+        "key": "b-hacker-workstation",
+        "name": "黑客工作站",
+        "prompt": "Use case: ui-mockup.\nCreate one high-fidelity desktop personal portfolio WEBSITE SCREENSHOT, landscape 1536x1024 composition. Single webpage without device frame, no browser chrome. Real Chinese developer portfolio for 曹泽祯 alias ZHEN, full stack developer. Direction B: Hacker workstation / personal development environment. Looks like a beautifully designed bespoke code editor transformed into a portfolio, immediately geeky yet highly readable and aesthetically sophisticated. Distinct from a space-themed portfolio. Palette charcoal #090d0d, desaturated green #88e9b1, amber #e8b66e, ivory #e5ebe5 and low contrast gray #26342e. Flat technical surfaces, precise monospaced Latin with clean Chinese sans serif, slim pane dividers, file tab navigation and a narrow left sidebar. No repetitive cards, no neon gradients.\nTop brand 'zhen.dev', small path '~/portfolio', navigation as editor tabs 'overview.md' 'projects/' 'experience.log'. Left file explorer sidebar titled 'workspace' with entries '关于我' '项目档案' '工作经历' '技术栈' and GitHub. Main hero has a tiny prompt 'zhen@workspace:~$ whoami', huge Chinese name '曹泽祯' and strong headline '写代码，也构建系统。', role '全栈开发工程师'. Supporting copy '从小程序到服务端，从空间数据到 AI 应用。'. Clear primary action '查看项目', secondary '查看经历'. Right side beautiful genuinely drawn isometric exploded silicon processor sculpture made of silver fine wireframe with subtle green phosphor highlights, visually coherent with code editor environment, no numbers pretending to be telemetry. Below the hero, integrated wide terminal panel with exact lines '$ cat experience.log', '2026.08—至今  北京菲尔迪斯网络传媒有限公司', '全栈开发工程师（实习）', '2026.03—2026.06  晶锐科技有限公司', '全栈开发工程师（实习生）'. At lower visible section, project directory rows '龙庆峡 · 文旅票务平台' '野一下 · 户外活动平台' '城市共享单车协同分析系统' with simple genuine stack annotations 'Java / Spring Boot', 'Node.js / MySQL', 'Python / XGBoost'. Deliberate airy spacing and large typography despite terminal style, subdued technical grid, crisp icons. No fictional metrics, no fabricated contribution chart, no awards, no watermark. Make Chinese text clear and accurate."
+      },
+      {
+        "key": "c-orbital-lab",
+        "name": "轨道实验室",
+        "prompt": "Use case: ui-mockup.\nCreate a stunning high-fidelity desktop personal portfolio WEBSITE SCREENSHOT, landscape 1536x1024 composition, one real webpage no laptop frame, no browser chrome. Chinese full stack developer 曹泽祯, alias ZHEN. Direction C: orbital engineering laboratory / future technical blueprint. LIGHT SILVER AND WHITE THEME that feels radically geeky and futuristic, not corporate generic. Palette frosted white #f2f6fa, cool silver #d7e0e9, royal cobalt #244bff, ink navy #122034 and cyan #52cce3. Thin technical blueprint lines, carefully composed open white space, huge confident graphite typography, translucent frosted technical panels with small cobalt accents. A magnificent large precision-engineered chrome gyroscope / toroidal computing core with blue inner glow hovers in right hero on fine blueprint perspective grid, like a high end industrial design rendering. Not a generic glass ball; a precisely machined silver interlocking ring sculpture. Sparse technical callout lines label visual concepts 'code' 'data' 'systems' without fake measurements.\nTop left custom typographic 'ZHEN.' and tiny Chinese name '曹泽祯', top nav '项目档案' '工作经历' '技术领域', outlined GitHub button. Hero left role '全栈开发工程师', huge heading exactly '让代码，' next line '连接真实世界。' Supporting text '业务系统 · 空间数据 · AI 应用' and smaller '从交互界面到服务端，持续探索工程的可能。'. Two buttons '浏览项目' and '认识我'. Lower section technical catalogue but elegant asymmetrical magazine design titled '最近的构建' with two horizontal project highlights '龙庆峡' subtitle '文旅票务平台 / Java · Spring Boot', '野一下' subtitle '户外活动平台 / Node.js · MySQL'. Below a fine strip lists '微信原生小程序    HarmonyOS    Flask    Neo4j'. Should feel like a future hardware engineer personal lab, premium and impressive, clear usable website, original art direction. Avoid identical rounded SaaS cards, arbitrary metrics, fake qualifications, fake awards, humanoids, stock portraits, watermark. All Chinese text accurate and readable."
+      }
+    ]
+  }
+}

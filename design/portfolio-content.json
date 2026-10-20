@@ -1,0 +1,246 @@
+{
+  "updated": "2026-10-20",
+  "profile": {
+    "name": "曹泽祯",
+    "alias": "ZHEN",
+    "role": "全栈开发工程师",
+    "headline": "把想法，构建成真实系统。",
+    "summary": "围绕真实业务构建微信原生小程序、运营后台和服务端，探索空间数据分析、知识图谱与 AI 应用。",
+    "github": "https://github.com/zhen666555-sketch"
+  },
+  "experience": [
+    {
+      "company": "北京菲尔迪斯网络传媒有限公司",
+      "role": "全栈开发工程师（实习）",
+      "period": "2026.08—至今",
+      "description": "参与龙庆峡文旅票务平台与野一下户外活动平台开发，覆盖小程序、运营后台、服务端、数据库及部署维护。",
+      "highlights": [
+        "通过幂等校验、订单快照与持久化任务处理交易状态一致性。",
+        "实现活动审核、报名、保险登记、签到核销与工作人员权限校验。",
+        "结合腾讯云、Nginx、HTTPS 和自动化回归支持版本交付。"
+      ],
+      "projects": [
+        "longqingxia",
+        "yeyixia"
+      ]
+    },
+    {
+      "company": "晶锐科技有限公司",
+      "role": "全栈开发工程师（实习生）",
+      "period": "2026.03—2026.06",
+      "description": "参与静脉输液治疗领域知识图谱的构建与应用，围绕知识检索、RAG 问答、推荐规则及管理页面展开开发。",
+      "highlights": [
+        "组织领域文档、实体关系与 Neo4j 数据查询。",
+        "参与关键词、向量与图谱结果融合检索及回答来源组织。",
+        "配套 Flask 业务接口、Vue 3 页面、JWT 认证与缓存模块。"
+      ],
+      "projects": [
+        "iv-therapy"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "longqingxia",
+      "name": "龙庆峡",
+      "subtitle": "文旅票务平台",
+      "group": "北京菲尔迪斯实习",
+      "period": null,
+      "description": "连接游客小程序、运营后台与交易后端，覆盖选票、订单、电子票券及退款流程。",
+      "highlights": [
+        "微信支付与第三方票务接口对接。",
+        "幂等键、订单快照、持久化 outbox 与重试。",
+        "统一订单分类及多人票券展示口径。"
+      ],
+      "tech": [
+        "微信原生小程序",
+        "Java 21",
+        "Spring Boot",
+        "MyBatis",
+        "MySQL",
+        "Flyway"
+      ],
+      "access": "工作项目，源码非公开"
+    },
+    {
+      "id": "yeyixia",
+      "name": "野一下",
+      "subtitle": "户外活动管理平台",
+      "group": "北京菲尔迪斯实习",
+      "period": null,
+      "description": "围绕参与者、主理人与工作人员组织活动发布、审核、报名、保险登记及签到核销。",
+      "highlights": [
+        "原生小程序与同源运营后台。",
+        "关系表迁移、唯一约束与 revision 条件更新。",
+        "会话、岗位权限、敏感字段加密及私有图片访问。"
+      ],
+      "tech": [
+        "微信原生小程序",
+        "Node.js",
+        "MySQL",
+        "COS",
+        "GitHub Actions"
+      ],
+      "access": "工作项目，源码非公开"
+    },
+    {
+      "id": "iv-therapy",
+      "name": "静脉输液治疗领域知识图谱",
+      "subtitle": "知识服务与 RAG 应用",
+      "group": "晶锐科技实习",
+      "period": "2026.03—2026.06",
+      "description": "围绕临床指南、专家共识与护理规范，参与领域知识组织、检索问答及规则匹配。",
+      "highlights": [
+        "Neo4j 实体关系与结构化知识查询。",
+        "关键词、向量与图谱融合检索。",
+        "导管推荐规则、并发症匹配与参考来源。"
+      ],
+      "tech": [
+        "Python",
+        "Flask",
+        "Vue 3",
+        "Neo4j",
+        "MongoDB",
+        "RAG"
+      ],
+      "boundary": "前端部分页面为演示分支，后端能力与前端接入范围分别描述。"
+    },
+    {
+      "id": "bike-transit",
+      "name": "城市共享单车协同分析系统",
+      "subtitle": "空间数据与可解释建模",
+      "group": "毕业设计",
+      "period": "2025.11—2026.04",
+      "description": "通过数据处理、统计看板、地图展示、需求建模与模型解释，分析共享单车与地铁接驳。",
+      "highlights": [
+        "站点、POI 与地铁网络空间特征构建。",
+        "OLS / XGBoost 对比与站点隔离评估。",
+        "SHAP / PDP 解释与模型结果恢复。"
+      ],
+      "tech": [
+        "Python",
+        "Flask",
+        "GeoPandas",
+        "NetworkX",
+        "XGBoost",
+        "SHAP",
+        "Leaflet"
+      ]
+    },
+    {
+      "id": "zhixing",
+      "name": "知行法鉴",
+      "subtitle": "交通法律咨询 AI 小程序",
+      "group": "参赛项目",
+      "period": "2025.10—2025.12",
+      "description": "串联原生聊天页面、云函数与模型接口，围绕事故描述组织结构化参考回复。",
+      "highlights": [
+        "领域提示词与模型输出解析。",
+        "消息、加载、滚动及聊天清理交互。",
+        "模型异常、超时与客户端回退处理。"
+      ],
+      "tech": [
+        "微信原生小程序",
+        "Node.js",
+        "CloudBase",
+        "DeepSeek API"
+      ],
+      "boundary": "本地小规模 LoRA 实验与云端咨询链路分别记录，不宣称自研法律模型已部署。"
+    },
+    {
+      "id": "harmony-community",
+      "name": "友邻社区",
+      "subtitle": "HarmonyOS 智慧社区物业管理平台",
+      "group": "移动端开发",
+      "period": "2025.01—2025.04",
+      "description": "以 ArkUI 声明式界面连接物业信息、邻里动态与社区生活服务。",
+      "highlights": [
+        "四 Tab 与 20 个业务路由组织。",
+        "统一 HTTP 请求、令牌注入与状态管理。",
+        "物业公告、快递领取、家政及反馈等接口对接。"
+      ],
+      "tech": [
+        "ArkTS",
+        "ArkUI",
+        "Stage / UIAbility",
+        "AppStorage",
+        "HTTP API"
+      ]
+    },
+    {
+      "id": "shopping",
+      "name": "超市购物小程序",
+      "subtitle": "原生购物流程与业务接口",
+      "group": "参赛项目",
+      "period": "2024.11—2025.01",
+      "description": "基于既有框架参与商品、分类、购物车及用户中心开发，对接 Java 业务后端。",
+      "highlights": [
+        "分类切换、商品详情与购物车状态更新。",
+        "登录、收藏、浏览足迹及订单筛选。",
+        "商品、主从订单、地址与权限等后端交付材料。"
+      ],
+      "tech": [
+        "微信原生小程序",
+        "Java",
+        "Spring Boot",
+        "MyBatis",
+        "MySQL",
+        "Shiro"
+      ],
+      "boundary": "部分结算与支付方法为空实现，不宣称完整交易闭环。"
+    }
+  ],
+  "skills": [
+    {
+      "name": "界面与移动端",
+      "items": [
+        "JavaScript",
+        "HTML / CSS",
+        "微信原生小程序",
+        "Vue 3",
+        "ArkTS / ArkUI"
+      ]
+    },
+    {
+      "name": "服务端与数据",
+      "items": [
+        "Java / Spring Boot",
+        "Node.js",
+        "Python / Flask",
+        "MySQL",
+        "Neo4j",
+        "MongoDB"
+      ]
+    },
+    {
+      "name": "空间分析与 AI",
+      "items": [
+        "GeoPandas / Shapely",
+        "NetworkX",
+        "XGBoost",
+        "SHAP / PDP",
+        "RAG",
+        "DeepSeek API"
+      ]
+    },
+    {
+      "name": "工程交付",
+      "items": [
+        "Git",
+        "GitHub Actions",
+        "Nginx",
+        "HTTPS",
+        "腾讯云 CVM / COS",
+        "回归测试"
+      ]
+    }
+  ],
+  "editorialNotes": [
+    "内容依据个人经历库 README 与项目经历的写作依据及核验记录。",
+    "两项北京菲尔迪斯项目的具体参与起止未确认，不用任职起点代替。",
+    "共享单车日期暂沿用全栈经历库，其他简历版本存在 2026.05 的结束月份。",
+    "不沿用旧主页未经经历库支持的提升比例、可用性、获奖和负责人称谓。",
+    "不链接私有经历库或私有源码作为公众可用入口。",
+    "已将核验后的内容整合到正式 index.html；修改此草稿不会自动重建首页，后续维护需同步正文。"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "mode": "built-in image_gen",
+  "assets": [
+    {
+      "key": "space-background",
+      "prompt": "Use case: stylized-concept. Asset type: background image for a real personal developer portfolio website. A spectacular deep space starfield, cinematic very dark navy and blue-black, fine cyan cosmic dust and subtle distant blue nebula wisps across the right half, one tiny dark planet near upper right, a dim moon at far lower right. Left 45 percent of composition must be nearly empty black navy negative space for readable white webpage text. Wide landscape 1536x1024. No central sphere, no main subject in center, no orbital rings, no interface, no lettering, no logos, no watermark. High fidelity premium science-fiction atmosphere, faint pale icy highlights, beautifully realistic spatial depth; keep whole background dark and restrained so a separate luminous animated globe can be drawn above the right half."
+    },
+    {
+      "key": "longqingxia-landscape",
+      "prompt": "Use case: stylized-concept. Asset type: wide project artwork for a developer portfolio, conceptual image, no UI. Cinematic scenic reservoir gorge in northern China evocative of Longqingxia, towering steep limestone mountains, emerald blue water and a small white tour boat. Mix finely detailed dark photographic landscape with extremely subtle thin cyan topographic contour lines on the mountain surface, as though a premium digital landscape visualization. Night blue and teal color grade, glowing cyan edge lights, sophisticated dark sci-fi expedition atmosphere. Landscape 1536x1024. Compose the mountain toward right, no people close up, no buildings as focus. No words, labels, numbers, fake product screens, charts, logos or watermarks."
+    },
+    {
+      "key": "outdoor-landscape",
+      "prompt": "Use case: stylized-concept. Asset type: wide conceptual project artwork for a personal developer portfolio. Nightfall camping in a spectacular mountainous alpine valley, dark layered mountain ridges, two small tents warm amber-lit on a grassy ridge on lower right, pale blue dawn horizon and a quiet starfield. Very fine subtle cyan trail lines and a few luminous waypoint dots over ridges hint at outdoor route organization, premium photographic and sci-fi cartography fusion. Dark navy blue and cyan color grade, one warm accent from tent lights. Landscape 1536x1024. No words, labels, numbers, logos, watermarks, fake interface, or people close up."
+    }
+  ],
+  "delivery": "assets/*.webp",
+  "note": "PNG 原图保留于 Codex 生成目录，网页使用 WebP 压缩副本；生成图是概念视觉，不是实际产品截图。"
+}
