@@ -1,14 +1,23 @@
 /* 深空场景：所有动画共用一条渲染循环，离屏和后台自动停绘 */
 (() => {
   'use strict';
+  setupInterface();
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const mobile = matchMedia('(max-width: 800px)');
   const starCanvas = document.querySelector('#starfield');
   const orbCanvas = document.querySelector('#orb');
   const starsCtx = starCanvas.getContext('2d');
   const orbCtx = orbCanvas.getContext('2d');
-  const toggle = document.querySelector('.motion-toggle');
-  const motionLabel = toggle.querySelector('.motion-label');
+  const toggles = [...document.querySelectorAll('.motion-toggle')];
+  if (!starsCtx || !orbCtx) {
+    document.body.dataset.motion = 'off';
+    toggles.forEach(toggle => {
+      toggle.disabled = true;
+      toggle.setAttribute('aria-pressed', 'false');
+      toggle.querySelector('.motion-label').textContent = '静态模式';
+    });
+    return;
+  }
   let userMotion = null;
   try { userMotion = localStorage.getItem('zhen-motion'); } catch (_) { /* 隐私模式仍可使用开关 */ }
   let running = userMotion === null ? !reducedMotion.matches : userMotion === 'on';
@@ -36,10 +45,14 @@
   glowCtx.fillRect(0, 0, 48, 48);
 
   function sizeCanvas(canvas, context, width, height) {
-    const ratio = Math.min(devicePixelRatio || 1, mobile.matches ? 1.5 : 1.75);
+    const ratio = Math.min(devicePixelRatio || 1, mobile.matches ? 1.75 : 2);
     canvas.width = Math.round(width * ratio);
     canvas.height = Math.round(height * ratio);
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    context.imageSmoothingEnabled = true;
+    context.imageSmoothingQuality = 'high';
+    context.lineCap = 'round';
+    context.lineJoin = 'round';
   }
 
   function resize() {
@@ -50,13 +63,14 @@
     view.orbHeight = box.height;
     sizeCanvas(starCanvas, starsCtx, view.width, view.height);
     sizeCanvas(orbCanvas, orbCtx, box.width, box.height);
-    stars = Array.from({ length: mobile.matches ? 100 : 220 }, () => ({
-      x: Math.random() * view.width, y: Math.random() * view.height,
+    const starCount = mobile.matches ? 100 : 220;
+    if (stars.length !== starCount) stars = Array.from({ length: starCount }, () => ({
+      x: Math.random(), y: Math.random(),
       z: .2 + Math.random() * .8, phase: Math.random() * TAU,
       radius: .3 + Math.random() * .9
     }));
     const count = mobile.matches ? 440 : 820;
-    nodes = Array.from({ length: count }, (_, i) => {
+    if (nodes.length !== count) nodes = Array.from({ length: count }, (_, i) => {
       const y = 1 - 2 * (i + .5) / count;
       const r = Math.sqrt(1 - y * y);
       const angle = i * Math.PI * (3 - Math.sqrt(5));
@@ -72,8 +86,8 @@
     const ctx = starsCtx;
     ctx.clearRect(0, 0, view.width, view.height);
     for (const s of stars) {
-      const x = (s.x + time * s.z * 2.4 + view.width) % view.width + pointer.x * s.z * 10;
-      const y = (s.y + time * s.z * .65 + view.height) % view.height + pointer.y * s.z * 8;
+      const x = (s.x * view.width + time * s.z * 2.4 + view.width) % view.width + pointer.x * s.z * 10;
+      const y = (s.y * view.height + time * s.z * .65 + view.height) % view.height + pointer.y * s.z * 8;
       const alpha = .18 + s.z * .42 + Math.sin(time * .7 + s.phase) * .16;
       ctx.fillStyle = `rgba(168,215,250,${alpha})`;
       ctx.beginPath();
@@ -101,14 +115,17 @@
     }
   }
 
-  function project(x, y, z, yaw, tilt, radius, cx, cy) {
+  function createProjector(yaw, tilt, radius, cx, cy) {
     const cos = Math.cos(yaw), sin = Math.sin(yaw);
-    const xx = x * cos + z * sin;
-    const zz = -x * sin + z * cos;
-    const yy = y * Math.cos(tilt) - zz * Math.sin(tilt);
-    const depth = y * Math.sin(tilt) + zz * Math.cos(tilt);
-    const perspective = 3.8 / (3.8 + depth);
-    return { x: cx + xx * radius * perspective, y: cy + yy * radius * perspective, z: depth, p: perspective };
+    const tiltCos = Math.cos(tilt), tiltSin = Math.sin(tilt);
+    return (x, y, z) => {
+      const xx = x * cos + z * sin;
+      const zz = -x * sin + z * cos;
+      const yy = y * tiltCos - zz * tiltSin;
+      const depth = y * tiltSin + zz * tiltCos;
+      const perspective = 3.8 / (3.8 + depth);
+      return { x: cx + xx * radius * perspective, y: cy + yy * radius * perspective, z: depth, p: perspective };
+    };
   }
 
   function drawOrb(time) {
@@ -120,7 +137,7 @@
     const cy = height * .49 + pointer.y * 9;
     const yaw = time * .075 + pointer.x * .11;
     const tilt = -.24 + Math.sin(time * .11) * .035 + pointer.y * .055;
-    const point = (x, y, z) => project(x, y, z, yaw, tilt, radius, cx, cy);
+    const point = createProjector(yaw, tilt, radius, cx, cy);
 
     const halo = ctx.createRadialGradient(cx, cy, radius * .45, cx, cy, radius * 1.65);
     halo.addColorStop(0, '#1a6baf05');halo.addColorStop(.35, '#1778d729');
@@ -130,7 +147,7 @@
 
     // 经纬网络组成球体，前后半球分别处理透明度
     const curves = [];
-    const segments = mobile.matches ? 54 : 76;
+    const segments = mobile.matches ? 72 : 96;
     for (let latitude = -4; latitude <= 4; latitude++) {
       const phi = latitude * Math.PI / 11;
       const ring = [];
@@ -162,10 +179,11 @@
       ctx.stroke();
     }
 
-    const body = ctx.createRadialGradient(cx - radius * .3, cy - radius * .4, 0, cx, cy, radius * 1.06);
-    body.addColorStop(0, '#1b6a9e0b');body.addColorStop(.76, '#07294005');
-    body.addColorStop(.92, '#2582be14');body.addColorStop(.98, '#83e8ff3d');body.addColorStop(1, '#37a4eb00');
-    ctx.fillStyle = body;ctx.beginPath();ctx.arc(cx, cy, radius * 1.06, 0, TAU);ctx.fill();
+    const body = ctx.createRadialGradient(cx - radius * .3, cy - radius * .4, 0, cx, cy, radius * 1.12);
+    body.addColorStop(0, '#1b6a9e08');body.addColorStop(.68, '#07294005');
+    body.addColorStop(.82, '#2582be10');body.addColorStop(.88, '#83e8ff2b');
+    body.addColorStop(.94, '#3998cc12');body.addColorStop(1, '#37a4eb00');
+    ctx.fillStyle = body;ctx.beginPath();ctx.arc(cx, cy, radius * 1.12, 0, TAU);ctx.fill();
 
     // 旋转的点云形成不规则数字大陆
     const points = nodes.map(n => ({ ...point(n.x, n.y, n.z), node: n }));
@@ -175,8 +193,9 @@
       const alpha = (front ? .58 : .12) * (p.node.bright ? 1 : .38);
       ctx.fillStyle = `rgba(133,220,255,${alpha})`;
       ctx.beginPath();ctx.arc(p.x, p.y, (p.node.bright ? 1.15 : .6) * p.p, 0, TAU);ctx.fill();
-      if (p.node.bright && front && Math.sin(p.node.phase + time * .55) > .96) {
-        ctx.globalAlpha = .55;ctx.drawImage(glow, p.x - 7, p.y - 7, 14, 14);ctx.globalAlpha = 1;
+      const pulse = Math.max(0, (Math.sin(p.node.phase + time * .55) - .7) / .3);
+      if (p.node.bright && front && pulse > 0) {
+        ctx.globalAlpha = pulse * pulse * .5;ctx.drawImage(glow, p.x - 7, p.y - 7, 14, 14);ctx.globalAlpha = 1;
       }
     }
 
@@ -186,13 +205,14 @@
       const orbit = [];
       const angle = -.85 + i * .49;
       const orbitRadius = 1.16 + i * .075;
+      const orbitProject = createProjector(yaw * .45 + i * .68, tilt + .25, radius, cx, cy);
       const orbitPoint = phase => {
         const x = Math.cos(phase) * orbitRadius;
         const z = Math.sin(phase) * orbitRadius;
         const y = z * Math.sin(angle);
-        return project(x, y, z * Math.cos(angle), yaw * .45 + i * .68, tilt + .25, radius, cx, cy);
+        return orbitProject(x, y, z * Math.cos(angle));
       };
-      const count = mobile.matches ? 85 : 125;
+      const count = mobile.matches ? 112 : 180;
       for (let j = 0; j <= count; j++) orbit.push(orbitPoint(j / count * TAU));
       ctx.strokeStyle = i === 0 ? '#9beaff68' : '#6abfff3d';
       ctx.lineWidth = i === 0 ? 1.1 : .6;
@@ -246,20 +266,22 @@
 
   function applyMotion() {
     document.body.dataset.motion = running ? 'on' : 'off';
-    toggle.setAttribute('aria-pressed', String(running));
-    motionLabel.textContent = running ? '动态：开启' : '动态：暂停';
+    toggles.forEach(toggle => {
+      toggle.setAttribute('aria-pressed', String(running));
+      toggle.querySelector('.motion-label').textContent = running ? '动态：开启' : '动态：暂停';
+    });
     if (frame) cancelAnimationFrame(frame);
     frame = 0;
     lastTimestamp = 0;
     if (running && !document.hidden) frame = requestAnimationFrame(animate);
     else drawScene(sceneTime);
   }
-  toggle.addEventListener('click', () => {
+  toggles.forEach(toggle => toggle.addEventListener('click', () => {
     running = !running;
     userMotion = running ? 'on' : 'off';
     try { localStorage.setItem('zhen-motion', userMotion); } catch (_) { /* 开关仍在本次访问生效 */ }
     applyMotion();
-  });
+  }));
   reducedMotion.addEventListener('change', () => {
     if (userMotion === null) { running = !reducedMotion.matches;applyMotion(); }
   });
@@ -280,27 +302,90 @@
       orbVisible = entries[0].isIntersecting;
       if (orbVisible && !running) drawOrb(sceneTime);
     }, { rootMargin: '80px' }).observe(orbCanvas);
-    const navLinks = [...document.querySelectorAll('nav a')];
-    const sectionObserver = new IntersectionObserver(entries => {
-      const visible = entries.filter(entry => entry.isIntersecting);
-      if (!visible.length) return;
-      const id = visible[0].target.id;
-      navLinks.forEach(link => {
-        if (link.hash === '#' + id) link.setAttribute('aria-current', 'location');
-        else link.removeAttribute('aria-current');
-      });
-    }, { rootMargin: '-10% 0px -65% 0px' });
-    document.querySelectorAll('main section[id]').forEach(section => sectionObserver.observe(section));
   }
-  const menu = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('#main-nav');
-  function closeMenu() { nav.classList.remove('is-open');menu.setAttribute('aria-expanded', 'false'); }
-  menu.addEventListener('click', () => {
-    const open = nav.classList.toggle('is-open');
-    menu.setAttribute('aria-expanded', String(open));
-  });
-  nav.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
-  document.addEventListener('keydown', event => { if (event.key === 'Escape' && nav.classList.contains('is-open')) { closeMenu();menu.focus(); } });
   resize();
   applyMotion();
+
+  function setupInterface() {
+    const header = document.querySelector('.site-header');
+    const menu = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('#main-nav');
+    const navLinks = [...nav.querySelectorAll('a')];
+    const sections = [...document.querySelectorAll('main section[id]')];
+    let scrollFrame = 0;
+
+    function updateReadingState() {
+      scrollFrame = 0;
+      const distance = Math.max(0, document.documentElement.scrollHeight - innerHeight);
+      const progress = distance ? Math.min(1, Math.max(0, scrollY / distance)) : 0;
+      document.documentElement.style.setProperty('--reading-progress', progress.toFixed(4));
+      header.classList.toggle('is-scrolled', scrollY > 24);
+      const threshold = header.offsetHeight + Math.min(140, innerHeight * .18);
+      let current = '';
+      sections.forEach(section => {
+        if (section.getBoundingClientRect().top <= threshold) current = section.id;
+      });
+      if (distance && distance - scrollY <= 3) current = 'contact';
+      navLinks.forEach(link => {
+        if (link.hash === '#' + current) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+    function queueReadingState() {
+      if (!scrollFrame) scrollFrame = requestAnimationFrame(updateReadingState);
+    }
+    function closeMenu(returnFocus = false) {
+      nav.classList.remove('is-open');
+      menu.setAttribute('aria-expanded', 'false');
+      if (returnFocus) menu.focus();
+    }
+    menu.addEventListener('click', () => {
+      const open = nav.classList.toggle('is-open');
+      menu.setAttribute('aria-expanded', String(open));
+    });
+    nav.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && nav.classList.contains('is-open')) closeMenu(true);
+    });
+    document.addEventListener('pointerdown', event => {
+      if (!header.contains(event.target) && nav.classList.contains('is-open')) closeMenu();
+    });
+    const narrow = matchMedia('(max-width: 800px)');
+    narrow.addEventListener('change', () => { if (!narrow.matches) closeMenu(); });
+
+    document.querySelectorAll('.project-details').forEach(details => {
+      const summary = details.querySelector('summary');
+      const name = details.closest('article').querySelector('h3').firstChild.textContent.trim();
+      function updateDetail() {
+        const label = details.open ? '收起工程细节' : '展开工程细节';
+        summary.firstChild.textContent = label;
+        summary.setAttribute('aria-label', name + '：' + label);
+        queueReadingState();
+      }
+      details.addEventListener('toggle', updateDetail);
+      updateDetail();
+    });
+    // 从经历或外部锚点进入项目时，直接展开对应档案
+    function openHashProject() {
+      let id;
+      try { id = decodeURIComponent(location.hash.slice(1)); } catch (_) { return; }
+      const target = document.getElementById(id);
+      if (target && target.matches('details.archive-item')) target.open = true;
+      queueReadingState();
+    }
+    document.addEventListener('click', event => {
+      const link = event.target.closest('a[href^="#"]');
+      if (!link || link.hash.length < 2) return;
+      let target;
+      try { target = document.getElementById(decodeURIComponent(link.hash.slice(1))); } catch (_) { return; }
+      if (target && target.matches('details.archive-item')) target.open = true;
+    });
+    window.addEventListener('hashchange', openHashProject);
+    window.addEventListener('scroll', queueReadingState, { passive: true });
+    window.addEventListener('resize', queueReadingState, { passive: true });
+    document.addEventListener('toggle', queueReadingState, true);
+    if ('ResizeObserver' in window) new ResizeObserver(queueReadingState).observe(document.querySelector('main'));
+    openHashProject();
+    updateReadingState();
+  }
 })();
