@@ -286,6 +286,20 @@ nav a:after { border-radius:2px; box-shadow:0 0 10px #48e5f536; }
 .contact-section:before { background:radial-gradient(circle,#14527826 0%,#1452780f 35%,#14527800 70%); filter:blur(20px); }
 .site-footer { border-top-color:#8dc9df12; }
 .reading-progress { box-shadow:0 0 9px #48e5f545; }
+main { overflow-x:clip; }
+.language-switch { display:inline-flex; flex:none; align-items:center; min-height:44px; padding:2px; border:1px solid var(--surface-border); border-radius:999px; background:#0a1725ad; font-size:12px; }
+.language-switch > * { display:grid; place-items:center; min-width:34px; min-height:38px; border-radius:999px; }
+.language-switch [aria-current="page"] { color:#bbf4fa; background:#20516a75; font-weight:700; }
+.language-switch a { color:#a8c3d7; }
+.language-switch a:hover { color:#e9f8ff; background:#1d3e5470; }
+.language-switch a:focus-visible { outline:2px solid #85e7f3; outline-offset:-2px; }
+html[lang="en"] .hero h1 { font-size:clamp(34px,5vw,74px); }
+html[lang="en"] .hero h1 span { white-space:normal; }
+html[lang="en"] .hero-buttons { flex-wrap:wrap; }
+@media (min-width:801px) and (max-width:1050px) {
+  html[lang="en"] .brand span,html[lang="en"] .brand i,html[lang="en"] .header-actions .github-link span { display:none; }
+  html[lang="en"] #main-nav { gap:18px; }
+}
 @media (hover:hover) and (pointer:fine) {
   .skill-group:hover { border-color:#8dc9df44; }
 }
@@ -295,12 +309,18 @@ nav a:after { border-radius:2px; box-shadow:0 0 10px #48e5f536; }
   .tech-strip { padding-inline:16px; }
   .skill-group { padding:18px 16px; }
   .space-background:after { filter:blur(20px); }
+  html[lang="en"] #main-nav a { padding-inline:8px; font-size:13px; }
+  html[lang="en"] .hero h1 { font-size:clamp(34px,6vw,54px); }
 }
 @media (max-width:520px) {
   :root { --radius-panel:16px; --radius-control:10px; }
   .project-art { margin:6px 6px 0; border-radius:10px 10px 0 0; }
   .archive-list { gap:9px; }
   .header-motion { background:transparent; box-shadow:none; }
+  .header-actions .github-link { display:none; }
+  .language-switch > * { min-width:29px; }
+  html[lang="en"] .hero h1 { font-size:clamp(29px,8vw,41px); }
+  html[lang="en"] .hero-buttons .button { padding-inline:10px; gap:8px; font-size:12px; }
   .skill-group { padding:18px 14px; border-radius:12px; }
 }
 @media (prefers-reduced-motion:reduce) {

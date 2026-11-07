@@ -1,6 +1,9 @@
 /* 深空场景：所有动画共用一条渲染循环，离屏和后台自动停绘 */
 (() => {
   'use strict';
+  const labels = document.documentElement.lang === 'en'
+    ? { motionOn: 'Motion: on', motionOff: 'Motion: off', staticMode: 'Static mode', expand: 'Expand implementation details', collapse: 'Collapse implementation details', separator: ': ' }
+    : { motionOn: '动态：开启', motionOff: '动态：暂停', staticMode: '静态模式', expand: '展开工程细节', collapse: '收起工程细节', separator: '：' };
   setupInterface();
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const mobile = matchMedia('(max-width: 800px)');
@@ -14,7 +17,7 @@
     toggles.forEach(toggle => {
       toggle.disabled = true;
       toggle.setAttribute('aria-pressed', 'false');
-      toggle.querySelector('.motion-label').textContent = '静态模式';
+      toggle.querySelector('.motion-label').textContent = labels.staticMode;
     });
     return;
   }
@@ -268,7 +271,7 @@
     document.body.dataset.motion = running ? 'on' : 'off';
     toggles.forEach(toggle => {
       toggle.setAttribute('aria-pressed', String(running));
-      toggle.querySelector('.motion-label').textContent = running ? '动态：开启' : '动态：暂停';
+      toggle.querySelector('.motion-label').textContent = running ? labels.motionOn : labels.motionOff;
     });
     if (frame) cancelAnimationFrame(frame);
     frame = 0;
@@ -312,6 +315,8 @@
     const nav = document.querySelector('#main-nav');
     const navLinks = [...nav.querySelectorAll('a')];
     const sections = [...document.querySelectorAll('main section[id]')];
+    const languageLink = header.querySelector('.language-switch a');
+    const languagePath = languageLink.getAttribute('href');
     let scrollFrame = 0;
 
     function updateReadingState() {
@@ -357,9 +362,9 @@
       const summary = details.querySelector('summary');
       const name = details.closest('article').querySelector('h3').firstChild.textContent.trim();
       function updateDetail() {
-        const label = details.open ? '收起工程细节' : '展开工程细节';
+        const label = details.open ? labels.collapse : labels.expand;
         summary.firstChild.textContent = label;
-        summary.setAttribute('aria-label', name + '：' + label);
+        summary.setAttribute('aria-label', name + labels.separator + label);
         queueReadingState();
       }
       details.addEventListener('toggle', updateDetail);
@@ -370,6 +375,7 @@
       let id;
       try { id = decodeURIComponent(location.hash.slice(1)); } catch (_) { return; }
       const target = document.getElementById(id);
+      languageLink.setAttribute('href', languagePath + (target ? location.hash : ''));
       if (target && target.matches('details.archive-item')) target.open = true;
       queueReadingState();
     }
