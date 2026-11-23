@@ -1,397 +1,164 @@
-/* 深空场景：所有动画共用一条渲染循环，离屏和后台自动停绘 */
 (() => {
   'use strict';
-  const labels = document.documentElement.lang === 'en'
-    ? { motionOn: 'Motion: on', motionOff: 'Motion: off', staticMode: 'Static mode', expand: 'Expand implementation details', collapse: 'Collapse implementation details', separator: ': ' }
-    : { motionOn: '动态：开启', motionOff: '动态：暂停', staticMode: '静态模式', expand: '展开工程细节', collapse: '收起工程细节', separator: '：' };
-  setupInterface();
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const mobile = matchMedia('(max-width: 800px)');
-  const starCanvas = document.querySelector('#starfield');
-  const orbCanvas = document.querySelector('#orb');
-  const starsCtx = starCanvas.getContext('2d');
-  const orbCtx = orbCanvas.getContext('2d');
-  const toggles = [...document.querySelectorAll('.motion-toggle')];
-  if (!starsCtx || !orbCtx) {
-    document.body.dataset.motion = 'off';
-    toggles.forEach(toggle => {
-      toggle.disabled = true;
-      toggle.setAttribute('aria-pressed', 'false');
-      toggle.querySelector('.motion-label').textContent = labels.staticMode;
-    });
-    return;
+  const body = document.body;
+  body.dataset.js = 'on';
+  const english = document.documentElement.lang === 'en';
+  const motion = document.querySelector('.motion-toggle');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let preference;
+  try { preference = localStorage.getItem('zhen-motion'); } catch { /* Storage is optional. */ }
+  function updateMotion() {
+    const enabled = preference ? preference === 'on' : !reduced.matches;
+    body.dataset.motion = enabled ? 'on' : 'off';
+    motion.setAttribute('aria-pressed', String(enabled));
+    motion.title = english ? (enabled ? 'Pause motion' : 'Enable motion') : (enabled ? '暂停动态效果' : '开启动效');
+    body.dispatchEvent(new Event('motionchange'));
   }
-  let userMotion = null;
-  try { userMotion = localStorage.getItem('zhen-motion'); } catch (_) { /* 隐私模式仍可使用开关 */ }
-  let running = userMotion === null ? !reducedMotion.matches : userMotion === 'on';
-  let frame = 0;
-  let lastPaint = 0;
-  let sceneTime = 0;
-  let lastTimestamp = 0;
-  let orbVisible = true;
-  let view = { width: 0, height: 0, orbWidth: 0, orbHeight: 0 };
-  const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
-  let stars = [];
-  let nodes = [];
-  const TAU = Math.PI * 2;
-
-  const glow = document.createElement('canvas');
-  glow.width = glow.height = 48;
-  const glowCtx = glow.getContext('2d');
-  const glowGradient = glowCtx.createRadialGradient(24, 24, 0, 24, 24, 24);
-  glowGradient.addColorStop(0, '#ecffff');
-  glowGradient.addColorStop(.08, '#aff6ff');
-  glowGradient.addColorStop(.2, '#41cfffbd');
-  glowGradient.addColorStop(.5, '#2198ff38');
-  glowGradient.addColorStop(1, '#187bff00');
-  glowCtx.fillStyle = glowGradient;
-  glowCtx.fillRect(0, 0, 48, 48);
-
-  function sizeCanvas(canvas, context, width, height) {
-    const ratio = Math.min(devicePixelRatio || 1, mobile.matches ? 1.75 : 2);
-    canvas.width = Math.round(width * ratio);
-    canvas.height = Math.round(height * ratio);
-    context.setTransform(ratio, 0, 0, ratio, 0, 0);
-    context.imageSmoothingEnabled = true;
-    context.imageSmoothingQuality = 'high';
-    context.lineCap = 'round';
-    context.lineJoin = 'round';
-  }
-
-  function resize() {
-    view.width = innerWidth;
-    view.height = innerHeight;
-    const box = orbCanvas.getBoundingClientRect();
-    view.orbWidth = box.width;
-    view.orbHeight = box.height;
-    sizeCanvas(starCanvas, starsCtx, view.width, view.height);
-    sizeCanvas(orbCanvas, orbCtx, box.width, box.height);
-    const starCount = mobile.matches ? 100 : 220;
-    if (stars.length !== starCount) stars = Array.from({ length: starCount }, () => ({
-      x: Math.random(), y: Math.random(),
-      z: .2 + Math.random() * .8, phase: Math.random() * TAU,
-      radius: .3 + Math.random() * .9
-    }));
-    const count = mobile.matches ? 440 : 820;
-    if (nodes.length !== count) nodes = Array.from({ length: count }, (_, i) => {
-      const y = 1 - 2 * (i + .5) / count;
-      const r = Math.sqrt(1 - y * y);
-      const angle = i * Math.PI * (3 - Math.sqrt(5));
-      const x = Math.cos(angle) * r;
-      const z = Math.sin(angle) * r;
-      const density = Math.sin(x * 8 + Math.cos(y * 6)) + Math.cos(z * 9 + y * 4);
-      return { x, y, z, bright: density > .35, phase: i * .14 };
-    });
-    drawScene(sceneTime);
-  }
-
-  function drawStars(time) {
-    const ctx = starsCtx;
-    ctx.clearRect(0, 0, view.width, view.height);
-    for (const s of stars) {
-      const x = (s.x * view.width + time * s.z * 2.4 + view.width) % view.width + pointer.x * s.z * 10;
-      const y = (s.y * view.height + time * s.z * .65 + view.height) % view.height + pointer.y * s.z * 8;
-      const alpha = .18 + s.z * .42 + Math.sin(time * .7 + s.phase) * .16;
-      ctx.fillStyle = `rgba(168,215,250,${alpha})`;
-      ctx.beginPath();
-      ctx.arc(x, y, s.radius, 0, TAU);
-      ctx.fill();
-      if (s.z > .94) {
-        ctx.globalAlpha = alpha * .4;
-        ctx.drawImage(glow, x - 6, y - 6, 12, 12);
-        ctx.globalAlpha = 1;
-      }
-    }
-    // 流星沿远处轨迹滑过，避免遮挡正文
-    const meteor = time % 12;
-    if (meteor > 7 && meteor < 8.6) {
-      const phase = (meteor - 7) / 1.6;
-      const x = view.width * (.5 + phase * .48);
-      const y = view.height * (.06 + phase * .26);
-      const length = mobile.matches ? 65 : 130;
-      const tail = ctx.createLinearGradient(x - length, y - length * .45, x, y);
-      tail.addColorStop(0, '#6cdfff00');
-      tail.addColorStop(1, `rgba(143,232,255,${Math.sin(phase * Math.PI) * .7})`);
-      ctx.strokeStyle = tail;
-      ctx.lineWidth = 1;
-      ctx.beginPath();ctx.moveTo(x - length, y - length * .45);ctx.lineTo(x, y);ctx.stroke();
-    }
-  }
-
-  function createProjector(yaw, tilt, radius, cx, cy) {
-    const cos = Math.cos(yaw), sin = Math.sin(yaw);
-    const tiltCos = Math.cos(tilt), tiltSin = Math.sin(tilt);
-    return (x, y, z) => {
-      const xx = x * cos + z * sin;
-      const zz = -x * sin + z * cos;
-      const yy = y * tiltCos - zz * tiltSin;
-      const depth = y * tiltSin + zz * tiltCos;
-      const perspective = 3.8 / (3.8 + depth);
-      return { x: cx + xx * radius * perspective, y: cy + yy * radius * perspective, z: depth, p: perspective };
-    };
-  }
-
-  function drawOrb(time) {
-    const ctx = orbCtx;
-    const width = view.orbWidth, height = view.orbHeight;
-    ctx.clearRect(0, 0, width, height);
-    const radius = Math.min(width * .32, height * .35);
-    const cx = width * .57 + pointer.x * 12;
-    const cy = height * .49 + pointer.y * 9;
-    const yaw = time * .075 + pointer.x * .11;
-    const tilt = -.24 + Math.sin(time * .11) * .035 + pointer.y * .055;
-    const point = createProjector(yaw, tilt, radius, cx, cy);
-
-    const halo = ctx.createRadialGradient(cx, cy, radius * .45, cx, cy, radius * 1.65);
-    halo.addColorStop(0, '#1a6baf05');halo.addColorStop(.35, '#1778d729');
-    halo.addColorStop(.57, '#2689df18');halo.addColorStop(1, '#1365ab00');
-    ctx.fillStyle = halo;
-    ctx.fillRect(0, 0, width, height);
-
-    // 经纬网络组成球体，前后半球分别处理透明度
-    const curves = [];
-    const segments = mobile.matches ? 72 : 96;
-    for (let latitude = -4; latitude <= 4; latitude++) {
-      const phi = latitude * Math.PI / 11;
-      const ring = [];
-      for (let j = 0; j <= segments; j++) {
-        const theta = j / segments * TAU;
-        ring.push(point(Math.cos(phi) * Math.cos(theta), Math.sin(phi), Math.cos(phi) * Math.sin(theta)));
-      }
-      curves.push(ring);
-    }
-    for (let longitude = 0; longitude < 12; longitude++) {
-      const theta = longitude / 12 * Math.PI;
-      const ring = [];
-      for (let j = 0; j <= segments; j++) {
-        const phi = j / segments * TAU;
-        ring.push(point(Math.cos(phi) * Math.cos(theta), Math.sin(phi), Math.cos(phi) * Math.sin(theta)));
-      }
-      curves.push(ring);
-    }
-    for (const front of [false, true]) {
-      ctx.strokeStyle = front ? '#66d8ff41' : '#3776ab20';
-      ctx.lineWidth = front ? .65 : .45;
-      ctx.beginPath();
-      for (const curve of curves) {
-        for (let j = 1; j < curve.length; j++) {
-          const a = curve[j - 1], b = curve[j];
-          if ((b.z < 0) === front) { ctx.moveTo(a.x, a.y);ctx.lineTo(b.x, b.y); }
-        }
-      }
-      ctx.stroke();
-    }
-
-    const body = ctx.createRadialGradient(cx - radius * .3, cy - radius * .4, 0, cx, cy, radius * 1.12);
-    body.addColorStop(0, '#1b6a9e08');body.addColorStop(.68, '#07294005');
-    body.addColorStop(.82, '#2582be10');body.addColorStop(.88, '#83e8ff2b');
-    body.addColorStop(.94, '#3998cc12');body.addColorStop(1, '#37a4eb00');
-    ctx.fillStyle = body;ctx.beginPath();ctx.arc(cx, cy, radius * 1.12, 0, TAU);ctx.fill();
-
-    // 旋转的点云形成不规则数字大陆
-    const points = nodes.map(n => ({ ...point(n.x, n.y, n.z), node: n }));
-    points.sort((a, b) => b.z - a.z);
-    for (const p of points) {
-      const front = p.z < 0;
-      const alpha = (front ? .58 : .12) * (p.node.bright ? 1 : .38);
-      ctx.fillStyle = `rgba(133,220,255,${alpha})`;
-      ctx.beginPath();ctx.arc(p.x, p.y, (p.node.bright ? 1.15 : .6) * p.p, 0, TAU);ctx.fill();
-      const pulse = Math.max(0, (Math.sin(p.node.phase + time * .55) - .7) / .3);
-      if (p.node.bright && front && pulse > 0) {
-        ctx.globalAlpha = pulse * pulse * .5;ctx.drawImage(glow, p.x - 7, p.y - 7, 14, 14);ctx.globalAlpha = 1;
-      }
-    }
-
-    // 多层空间轨道与运行中的数据光点
-    ctx.globalCompositeOperation = 'screen';
-    for (let i = 0; i < 5; i++) {
-      const orbit = [];
-      const angle = -.85 + i * .49;
-      const orbitRadius = 1.16 + i * .075;
-      const orbitProject = createProjector(yaw * .45 + i * .68, tilt + .25, radius, cx, cy);
-      const orbitPoint = phase => {
-        const x = Math.cos(phase) * orbitRadius;
-        const z = Math.sin(phase) * orbitRadius;
-        const y = z * Math.sin(angle);
-        return orbitProject(x, y, z * Math.cos(angle));
-      };
-      const count = mobile.matches ? 112 : 180;
-      for (let j = 0; j <= count; j++) orbit.push(orbitPoint(j / count * TAU));
-      ctx.strokeStyle = i === 0 ? '#9beaff68' : '#6abfff3d';
-      ctx.lineWidth = i === 0 ? 1.1 : .6;
-      ctx.beginPath();
-      orbit.forEach((p, j) => { if (j === 0) ctx.moveTo(p.x,p.y); else ctx.lineTo(p.x,p.y); });
-      ctx.stroke();
-      for (let trail = 16; trail >= 0; trail--) {
-        const p = orbitPoint(time * (.18 + i * .025) + i * 1.8 - trail * .014);
-        ctx.globalAlpha = (1 - trail / 17) * .72;
-        const size = trail === 0 ? 24 : 4.5;
-        ctx.drawImage(glow, p.x - size / 2, p.y - size / 2, size, size);
-      }
-      ctx.globalAlpha = 1;
-      const satellite = orbitPoint(-time * .09 + i * 2.1);
-      ctx.drawImage(glow, satellite.x - 6, satellite.y - 6, 12, 12);
-    }
-    // 跨越球面的少量长连线，表现服务之间的连接
-    const network = points.filter(p => p.node.bright && p.z < -.3);
-    for (let i = 0; i < Math.min(network.length - 13, 72); i += 6) {
-      const a = network[i], b = network[i + 13];
-      ctx.strokeStyle = '#9ddfff25';ctx.lineWidth = .7;
-      ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
-      const phase = (time * .2 + i * .07) % 1;
-      const x = a.x + (b.x - a.x) * phase, y = a.y + (b.y - a.y) * phase;
-      ctx.globalAlpha = .6;ctx.drawImage(glow,x-4,y-4,8,8);ctx.globalAlpha = 1;
-    }
-    ctx.globalCompositeOperation = 'source-over';
-  }
-
-  function drawScene(time) {
-    if (!starsCtx || !orbCtx) return;
-    drawStars(time);
-    if (orbVisible) drawOrb(time);
-  }
-
-  function animate(timestamp) {
-    frame = 0;
-    if (!running || document.hidden) return;
-    const elapsed = lastTimestamp ? Math.min((timestamp - lastTimestamp) / 1000, .08) : 0;
-    lastTimestamp = timestamp;
-    sceneTime += elapsed;
-    const interval = mobile.matches ? 1000 / 30 : 1000 / 45;
-    if (timestamp - lastPaint >= interval) {
-      pointer.x += (pointer.targetX - pointer.x) * .055;
-      pointer.y += (pointer.targetY - pointer.y) * .055;
-      drawScene(sceneTime);
-      lastPaint = timestamp;
-    }
-    frame = requestAnimationFrame(animate);
-  }
-
-  function applyMotion() {
-    document.body.dataset.motion = running ? 'on' : 'off';
-    toggles.forEach(toggle => {
-      toggle.setAttribute('aria-pressed', String(running));
-      toggle.querySelector('.motion-label').textContent = running ? labels.motionOn : labels.motionOff;
-    });
-    if (frame) cancelAnimationFrame(frame);
-    frame = 0;
-    lastTimestamp = 0;
-    if (running && !document.hidden) frame = requestAnimationFrame(animate);
-    else drawScene(sceneTime);
-  }
-  toggles.forEach(toggle => toggle.addEventListener('click', () => {
-    running = !running;
-    userMotion = running ? 'on' : 'off';
-    try { localStorage.setItem('zhen-motion', userMotion); } catch (_) { /* 开关仍在本次访问生效 */ }
-    applyMotion();
-  }));
-  reducedMotion.addEventListener('change', () => {
-    if (userMotion === null) { running = !reducedMotion.matches;applyMotion(); }
+  updateMotion();
+  motion.hidden = false;
+  motion.addEventListener('click', () => {
+    preference = body.dataset.motion === 'on' ? 'off' : 'on';
+    try { localStorage.setItem('zhen-motion', preference); } catch { /* Keep this session's choice. */ }
+    updateMotion();
   });
-  document.addEventListener('visibilitychange', applyMotion);
-  let resizeFrame = 0;
-  window.addEventListener('resize', () => {
-    cancelAnimationFrame(resizeFrame);
-    resizeFrame = requestAnimationFrame(resize);
-  }, { passive: true });
-  window.addEventListener('pointermove', event => {
-    if (event.pointerType !== 'mouse') return;
-    pointer.targetX = (event.clientX / innerWidth - .5) * 2;
-    pointer.targetY = (event.clientY / innerHeight - .5) * 2;
-  }, { passive: true });
-  document.addEventListener('pointerleave', () => { pointer.targetX = pointer.targetY = 0; });
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(entries => {
-      orbVisible = entries[0].isIntersecting;
-      if (orbVisible && !running) drawOrb(sceneTime);
-    }, { rootMargin: '80px' }).observe(orbCanvas);
+  reduced.addEventListener('change', updateMotion);
+  const header = document.querySelector('.site-header');
+  const nav = document.querySelector('#main-nav');
+  const menu = document.querySelector('.menu-toggle');
+  function closeMenu() {
+    nav.classList.remove('is-open');
+    menu.setAttribute('aria-expanded', 'false');
   }
-  resize();
-  applyMotion();
+  menu.addEventListener('click', () => {
+    menu.setAttribute('aria-expanded', String(nav.classList.toggle('is-open')));
+  });
+  nav.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && nav.classList.contains('is-open')) { closeMenu(); menu.focus(); }
+  });
+  document.addEventListener('pointerdown', event => { if (!header.contains(event.target)) closeMenu(); });
+  matchMedia('(max-width: 720px)').addEventListener('change', closeMenu);
 
-  function setupInterface() {
-    const header = document.querySelector('.site-header');
-    const menu = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('#main-nav');
-    const navLinks = [...nav.querySelectorAll('a')];
-    const sections = [...document.querySelectorAll('main section[id]')];
-    const languageLink = header.querySelector('.language-switch a');
-    const languagePath = languageLink.getAttribute('href');
-    let scrollFrame = 0;
+  const language = header.querySelector('.language-switch a');
+  const languagePath = language.getAttribute('href');
+  const reader = document.querySelector('.case-reader');
+  const cases = new Map();
+  let returnTo = null;
+  let shown = '';
 
-    function updateReadingState() {
-      scrollFrame = 0;
-      const distance = Math.max(0, document.documentElement.scrollHeight - innerHeight);
-      const progress = distance ? Math.min(1, Math.max(0, scrollY / distance)) : 0;
-      document.documentElement.style.setProperty('--reading-progress', progress.toFixed(4));
-      header.classList.toggle('is-scrolled', scrollY > 24);
-      const threshold = header.offsetHeight + Math.min(140, innerHeight * .18);
-      let current = '';
-      sections.forEach(section => {
-        if (section.getBoundingClientRect().top <= threshold) current = section.id;
-      });
-      if (distance && distance - scrollY <= 3) current = 'contact';
-      navLinks.forEach(link => {
-        if (link.hash === '#' + current) link.setAttribute('aria-current', 'location');
-        else link.removeAttribute('aria-current');
-      });
-    }
-    function queueReadingState() {
-      if (!scrollFrame) scrollFrame = requestAnimationFrame(updateReadingState);
-    }
-    function closeMenu(returnFocus = false) {
-      nav.classList.remove('is-open');
-      menu.setAttribute('aria-expanded', 'false');
-      if (returnFocus) menu.focus();
-    }
-    menu.addEventListener('click', () => {
-      const open = nav.classList.toggle('is-open');
-      menu.setAttribute('aria-expanded', String(open));
-    });
-    nav.addEventListener('click', event => { if (event.target.closest('a')) closeMenu(); });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && nav.classList.contains('is-open')) closeMenu(true);
-    });
-    document.addEventListener('pointerdown', event => {
-      if (!header.contains(event.target) && nav.classList.contains('is-open')) closeMenu();
-    });
-    const narrow = matchMedia('(max-width: 800px)');
-    narrow.addEventListener('change', () => { if (!narrow.matches) closeMenu(); });
-
-    document.querySelectorAll('.project-details').forEach(details => {
-      const summary = details.querySelector('summary');
-      const name = details.closest('article').querySelector('h3').firstChild.textContent.trim();
-      function updateDetail() {
-        const label = details.open ? labels.collapse : labels.expand;
-        summary.firstChild.textContent = label;
-        summary.setAttribute('aria-label', name + labels.separator + label);
-        queueReadingState();
+  if (typeof reader.showModal === 'function') {
+    document.querySelectorAll('details.notes, details.archive-item').forEach(details => {
+      const row = details.classList.contains('archive-item');
+      const project = row ? details : details.closest('article');
+      const id = project.id;
+      const title = row ? details.querySelector('.archive-name').firstChild.textContent.trim() : project.querySelector('h3').textContent;
+      const kind = project.querySelector(row ? '.archive-subtitle' : '.project-type').textContent;
+      const question = details.querySelector('.case-question').textContent;
+      const entry = document.createElement('a');
+      entry.href = '#' + id;
+      entry.setAttribute('aria-haspopup', 'dialog');
+      if (row) {
+        details.removeAttribute('id');
+        entry.id = id;
+        entry.className = 'archive-entry';
+        entry.innerHTML = details.querySelector('summary').innerHTML;
+        entry.querySelector('.archive-plus').textContent = '→';
+      } else {
+        entry.className = 'read-case';
+        const arrow = document.createElement('span');
+        arrow.setAttribute('aria-hidden', 'true');
+        arrow.textContent = '→';
+        entry.append(question, arrow);
       }
-      details.addEventListener('toggle', updateDetail);
-      updateDetail();
+      entry.setAttribute('aria-label', title + ' · ' + question);
+      details.before(entry);
+      details.hidden = true;
+      const content = details.querySelector(row ? '.archive-body' : '.notes-body');
+      cases.set(id, {title, kind, question, content, entry});
     });
-    // 从经历或外部锚点进入项目时，直接展开对应档案
-    function openHashProject() {
-      let id;
-      try { id = decodeURIComponent(location.hash.slice(1)); } catch (_) { return; }
-      const target = document.getElementById(id);
-      languageLink.setAttribute('href', languagePath + (target ? location.hash : ''));
-      if (target && target.matches('details.archive-item')) target.open = true;
-      queueReadingState();
-    }
-    document.addEventListener('click', event => {
-      const link = event.target.closest('a[href^="#"]');
-      if (!link || link.hash.length < 2) return;
-      let target;
-      try { target = document.getElementById(decodeURIComponent(link.hash.slice(1))); } catch (_) { return; }
-      if (target && target.matches('details.archive-item')) target.open = true;
-    });
-    window.addEventListener('hashchange', openHashProject);
-    window.addEventListener('scroll', queueReadingState, { passive: true });
-    window.addEventListener('resize', queueReadingState, { passive: true });
-    document.addEventListener('toggle', queueReadingState, true);
-    if ('ResizeObserver' in window) new ResizeObserver(queueReadingState).observe(document.querySelector('main'));
-    openHashProject();
-    updateReadingState();
   }
+
+  const pane = reader.querySelector('.reader-page');
+  const contents = reader.querySelector('.reader-content');
+  const jumper = reader.querySelector('.reader-jump');
+  let sections = [];
+  jumper.addEventListener('change', () => {
+    const section = sections[Number(jumper.value)];
+    if (!section) return;
+    pane.scrollTop += section.getBoundingClientRect().top - pane.getBoundingClientRect().top - 16;
+    section.tabIndex = -1;
+    section.focus({preventScroll:true});
+    jumper.value = '';
+  });
+  function showCase(id) {
+    if (id === shown) return;
+    const item = cases.get(id);
+    reader.querySelector('#reader-title').textContent = item.title;
+    reader.querySelector('.reader-heading p').textContent = item.kind;
+    reader.querySelector('.reader-question').textContent = item.question;
+    contents.replaceChildren(item.content.cloneNode(true));
+    sections = [reader.querySelector('#reader-title'), ...contents.querySelectorAll('h4,.case-boundary strong')];
+    jumper.replaceChildren(new Option(english ? 'Jump to section' : '跳至章节', ''));
+    sections.forEach((section,i) => jumper.add(new Option(i ? section.textContent : (english ? 'Overview' : '项目概览'), String(i))));
+    reader.querySelector('.reader-language').href = languagePath + '#' + id;
+    if (!reader.open) {
+      document.body.classList.add('reading-case');
+      reader.showModal();
+      body.dispatchEvent(new Event('readerchange'));
+    }
+    pane.scrollTop = 0;
+    shown = id;
+  }
+  function hideCase() {
+    if (!reader.open) return;
+    const entry = cases.get(shown).entry;
+    reader.close();
+    document.body.classList.remove('reading-case');
+    body.dispatchEvent(new Event('readerchange'));
+    (returnTo || entry).focus({preventScroll:true});
+    if (!returnTo) entry.scrollIntoView({block:'center'});
+    returnTo = null;
+    shown = '';
+  }
+  function syncHash() {
+    let id;
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+    const target = document.getElementById(id);
+    if (cases.has(id)) showCase(id);
+    else {
+      hideCase();
+      if (target?.matches('details')) target.open = true;
+      else if (target?.matches('article')) {
+        const details = target.querySelector('.notes');
+        if (details) details.open = true;
+      }
+    }
+    language.setAttribute('href', languagePath + (target ? location.hash : ''));
+  }
+  window.addEventListener('hashchange', syncHash);
+  window.addEventListener('popstate', syncHash);
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link || event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || !cases.has(link.hash.slice(1))) return;
+    event.preventDefault();
+    returnTo = link;
+    history.pushState({portfolioReader:true}, '', link.hash);
+    syncHash();
+  });
+  function returnToPortfolio() {
+    if (history.state?.portfolioReader) history.back();
+    else {
+      history.replaceState(null, '', '#projects');
+      syncHash();
+    }
+  }
+  reader.querySelector('.reader-close').addEventListener('click', returnToPortfolio);
+  reader.querySelector('.reader-return').addEventListener('click', returnToPortfolio);
+  reader.addEventListener('cancel', event => { event.preventDefault(); returnToPortfolio(); });
+  reader.addEventListener('click', event => {
+    if (event.target !== reader) return;
+    const rect = reader.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) returnToPortfolio();
+  });
+  syncHash();
 })();

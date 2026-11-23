@@ -1,0 +1,80 @@
+* {box-sizing:border-box}
+:root {font-family:"Segoe UI","Microsoft YaHei",sans-serif;scroll-padding-top:16px}
+body {margin:0;color:var(--ink);background:var(--paper);line-height:1.6}
+.celadon {--ink:#193d37;--paper:#eaf0e6;--accent:#47756c;--rule:#bacbbf;--quiet:#4e645d}
+.dusk {--ink:#f7e5d7;--paper:#1e1921;--accent:#ffc0a2;--rule:#624957;--quiet:#d2b8c1}
+.fold {--ink:#272419;--paper:#f2eee1;--accent:#ae382b;--rule:#c5bfa9;--quiet:#645b4d}
+a,button {color:inherit;font:inherit}
+a {text-decoration:none}
+a:focus-visible,button:focus-visible,canvas:focus-visible {outline:3px solid var(--accent);outline-offset:3px}
+button {cursor:pointer}
+.chooser,.options,.settings,.section-heading,footer,footer>div {display:flex;align-items:center}
+.chooser {min-height:55px;padding:6px 5.5%;gap:12px;justify-content:space-between;border-bottom:1px solid var(--rule);font-size:13px}
+.options,.settings {gap:clamp(9px,2.2vw,34px)}
+.options a,.settings a,.settings button {padding:6px 0}
+.options a {color:var(--quiet);border-bottom:1px solid transparent}
+.options [aria-current] {border-color:var(--accent);color:var(--ink);font-weight:600}
+.settings button {border:0;background:transparent}
+.cover {position:relative;isolation:isolate;overflow:clip;min-height:clamp(490px,41vw,660px);display:grid;align-items:center}
+.art {position:relative;min-width:0}
+.art canvas {width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+.art canvas:active {cursor:grabbing}
+.art.poster {background-image:var(--poster);background-position:center;background-size:cover}
+.art.poster canvas {visibility:hidden}
+h1,h2,h3,p {margin:0}
+.identity {position:relative;min-width:0}
+h1,.signature,.work h2,.projects h3 {font-family:Georgia,"Songti SC","SimSun",serif;font-weight:400}
+h1 {letter-spacing:-.055em;line-height:1.08;font-size:clamp(70px,8vw,125px)}
+.signature {font-size:clamp(24px,3vw,46px);font-style:italic;line-height:1.35}
+.intro {max-width:25em;line-height:1.85;font-size:clamp(15px,1.18vw,19px);text-wrap:pretty;margin:20px 0}
+.browse {display:inline-block;font-size:14px;border-bottom:1px solid var(--accent);padding-bottom:3px}
+.caption {position:absolute;bottom:20px;right:5.5%;font-size:12px;color:var(--quiet);pointer-events:none}
+.work,footer {padding-inline:5.5%}
+.work {padding-block:clamp(32px,4vw,62px)}
+.section-heading {justify-content:space-between;padding-bottom:16px;gap:10px;border-bottom:1px solid var(--rule)}
+.section-heading h2 {font-size:clamp(29px,3.7vw,55px);line-height:1.1;letter-spacing:-.04em}
+.section-heading span,.projects small,footer {font-size:12px;color:var(--quiet)}
+.projects a {display:grid;grid-template-columns:.9fr 1.2fr auto;gap:20px;align-items:center;padding:20px 0;border-bottom:1px solid var(--rule)}
+.projects h3 {font-size:clamp(22px,2.6vw,38px);line-height:1.25}
+.projects a:hover h3,.projects a:focus-visible h3 {color:var(--accent)}
+.projects p {font-size:15px;max-width:40em}
+.projects b {font-size:20px;font-weight:400}
+footer {justify-content:space-between;padding-block:20px 35px}
+footer>div {gap:20px}
+.celadon .cover {background:radial-gradient(ellipse at 74% 60%,#b9cfc3 0%,#dbe6da 39%,#ecf1e7 77%);grid-template-columns:40% 60%}
+.celadon .identity {grid-row:1;grid-column:1;padding-left:13.75%}
+.celadon .signature {color:#527568}
+.celadon .art {grid-column:2;grid-row:1;height:clamp(435px,40vw,630px);--poster:url("celadon.webp")}
+.celadon .work {background:#f5f6ec}
+.dusk .cover {min-height:clamp(540px,46vw,710px);background:linear-gradient(#32253b,#c45e53 57%,#3f3547 65%,#292332);align-items:end}
+.dusk .art {position:absolute;inset:0;--poster:url("dusk.webp")}
+.dusk .art canvas {cursor:crosshair}
+.dusk .identity {pointer-events:none;margin:0 5.5% clamp(35px,5vw,72px);max-width:51%;color:#fff0dc;text-shadow:0 1px 12px #1a152b}
+.dusk .identity a {pointer-events:auto}
+.dusk .signature {font-size:clamp(25px,2.6vw,42px)}
+.dusk h1 {font-size:clamp(72px,8.6vw,130px);margin:5px 0}
+.dusk .caption {color:#f1d7c6;text-shadow:0 1px 6px #271b2c}
+.dusk .projects {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4%}
+.dusk .projects a {display:block;padding:18px 0}
+.dusk .projects p {margin:10px 0;line-height:1.8}
+.fold .cover {grid-template-columns:54% 46%;background:linear-gradient(108deg,#e8dec5,#f4f0e2 58%);border-bottom:1px solid var(--rule)}
+.fold .art {grid-column:1;grid-row:1;height:clamp(450px,42vw,650px);--poster:url("fold.webp")}
+.fold .identity {grid-column:2;grid-row:1;padding:22px 12% 22px 3%}
+.fold .signature {color:#a43b2c;font-size:clamp(22px,2.5vw,40px);font-style:normal}
+.fold h1 {font:750 clamp(62px,7.9vw,124px)/.86 Arial,sans-serif;text-transform:uppercase;letter-spacing:-.085em;max-width:3.9em;margin:16px 0}
+.fold .caption {right:auto;left:5.5%}
+.fold .projects h3 {font:650 clamp(20px,2.4vw,36px)/1.3 Arial,"Microsoft YaHei",sans-serif}
+@media(max-width:700px){
+ .chooser{padding:6px 4%;font-size:12px;flex-wrap:wrap;gap:2px 10px}.options,.settings{gap:12px}
+ .cover,.celadon .cover,.fold .cover{display:flex;flex-direction:column;align-items:stretch}
+ .celadon .identity,.fold .identity{padding:24px 6% 0;order:0}
+ .celadon .art,.fold .art{order:1;width:100%;height:clamp(265px,70vw,375px)}
+ .celadon .caption,.fold .caption{position:static;order:2;text-align:right;padding:0 6% 14px}
+ h1,.dusk h1{font-size:clamp(54px,13vw,86px)}.intro{margin:12px 0}.signature{font-size:26px}
+ .dusk .cover{min-height:540px;justify-content:end}.dusk .identity{max-width:88%;margin:0 6% 42px}
+ .dusk .caption{bottom:9px}
+ .fold h1{max-width:none;font-size:clamp(50px,12.8vw,87px);margin:8px 0}
+ .projects a{grid-template-columns:minmax(0,1fr) auto;gap:4px 8px;padding:15px 0}.projects p{grid-column:1}.projects b{grid-column:2;grid-row:1/3}
+ .dusk .projects{display:block}.dusk .projects a{display:grid}
+}
+@media(prefers-reduced-motion:no-preference){body[data-motion=on] .projects h3{transition:color .22s,transform .22s}body[data-motion=on] .projects a:hover h3{transform:translateX(3px)}}

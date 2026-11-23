@@ -1,0 +1,118 @@
+*{box-sizing:border-box}
+:root{font-family:"Segoe UI","Microsoft YaHei",sans-serif;font-size:16px}
+body{margin:0;color:var(--ink);background:var(--bg);line-height:1.6}
+h1,h2,h3,p,figure{margin:0}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.nav{height:64px;padding-inline:5%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.wordmark{font:800 22px/1 Georgia,serif;letter-spacing:-.05em}
+.wordmark span{color:var(--accent)}
+nav{display:flex;align-items:center;gap:clamp(12px,2.5vw,34px);font-size:13px}
+.motion{background:transparent;border:1px solid currentColor;border-radius:3px;padding:4px 10px;font-size:12px}
+h1{font-size:clamp(64px,7.5vw,119px);line-height:1.09;letter-spacing:-.06em}
+.role,.category,.file,.metric span,.scene-foot,.stub-foot{font-size:13px}
+.bio{max-width:30em;font-size:clamp(15px,1.2vw,19px);line-height:1.85;text-wrap:pretty}
+.case-link{display:inline-block;text-decoration:underline;text-underline-offset:5px;font-size:14px}
+#works{padding:38px 5% 55px}
+.work-heading{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
+.work-heading h2{font-size:clamp(28px,3vw,45px);line-height:1.2}
+.work-heading span,small{font-size:12px}
+.works-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:23px}
+.works-list>a{padding-right:20px}
+.works-list h3{line-height:1.35;margin:5px 0;font-size:clamp(19px,2vw,29px);letter-spacing:-.035em}
+.works-list p{font-size:14px;max-width:33em}
+.works-list small{display:block;margin-top:9px}
+.gpu{display:block;width:100%;height:100%;position:absolute;inset:0;pointer-events:none}
+.gpu[hidden]{display:none}
+.ticket{--bg:#ede5d6;--ink:#27231f;--accent:#d8a866}
+.ticket .nav{background:#181e1d;color:#f5e8cf}
+.ticket #intro{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(270px,.63fr);align-items:center;gap:5%;padding:46px 7% 65px;min-height:clamp(465px,37vw,610px);color:#fff2d9;background:linear-gradient(95deg,#0e191ae3 0%,#1622246b 55%,#1c201f4d),url("../../assets/longqingxia-landscape.webp") center 49%/cover}
+.ticket-copy h1,.ticket .work-heading h2,.ticket .works-list h3,.stub h2{font-family:Georgia,"Songti SC",SimSun,serif;font-weight:500}
+.ticket-copy .role{letter-spacing:.15em;color:#e3c7a2}
+.ticket-copy h1{margin:14px 0 0}
+.latin{font:italic clamp(27px,3.7vw,58px)/1.2 Georgia,serif;color:#e7cba5}
+.ticket-copy .bio{margin-top:21px;max-width:28em}
+.stub{isolation:isolate;position:relative;justify-self:center;width:min(100%,372px);background:#ebdcb8;color:#392d27;padding:20px clamp(19px,2vw,32px);box-shadow:0 16px 35px #07111669;transform:rotate(3deg);border-radius:3px;overflow:hidden;background-image:repeating-linear-gradient(117deg,transparent 0 3px,#8a674510 3px 4px)}
+.stub header,.stub-foot,.balance,.scene-foot,.file{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.stub header{font:11px/1.4 Consolas,monospace;letter-spacing:.06em;border-bottom:1px solid #76664e;padding-bottom:9px}
+.stub h2{font-size:clamp(32px,3.3vw,52px);line-height:1.15;position:relative;margin:16px 0 6px;max-width:76%}
+.stub>p{font-size:13px}
+.foil{position:absolute;right:8%;top:21%;width:28%;aspect-ratio:1;z-index:-1;border-radius:50%;background:repeating-radial-gradient(ellipse at 44% 50%,#9f754120 0 2px,#a676334f 3px 4px)}
+.foil.live{background:none}
+.perforation{margin:19px -40px 5px;border-top:2px dashed #8e7b62}
+.balance{justify-content:flex-start;align-items:baseline}
+.balance strong{font:italic clamp(40px,4.2vw,64px)/1.25 Georgia,serif}
+.balance span,.stub-foot{font-size:12px}
+.barcode{position:relative;height:24px;margin:8px 0 13px;background:repeating-linear-gradient(90deg,#3d332c 0 1px,transparent 1px 4px,#3d332c 4px 6px,transparent 6px 9px,#3d332c 9px 13px,transparent 13px 16px,#3d332c 16px 17px,transparent 17px 21px)}
+.barcode:after{content:"";position:absolute;inset:0 auto 0 0;width:2px;background:#ffdf8c;box-shadow:0 0 5px 1px #eea93f}
+.ticket[data-motion=on] .barcode:after{animation:scan 3.2s ease-in-out infinite alternate}
+@keyframes scan{to{left:99%}}
+.stub-foot button{background:#3b342d;color:#fff4d7;border:0;padding:5px 11px;font-size:12px}
+.scene-foot{position:absolute;inset:auto 5% 13px;font-size:12px;color:#eaddc4}
+.ticket .works-list{gap:26px}
+.ticket .works-list>a{border-top:1px solid #938169;padding-top:12px}
+.ticket .category,.ticket small{color:#755338}
+.metro{--bg:#edf2ea;--ink:#122c3c;--accent:#2149ce}
+.metro .nav{border-bottom:1px solid #98a9b0}
+.metro .wordmark{color:#1649b8;font-family:Arial,sans-serif;letter-spacing:-.09em}
+.metro #intro{display:grid;grid-template-columns:minmax(230px,.83fr) minmax(0,1.5fr);align-items:center;gap:3%;padding:32px 5%;background:linear-gradient(90deg,#f6f7ef,#e8efe7)}
+.metro-copy h1{font-family:"Microsoft YaHei",Arial,sans-serif;font-weight:750;font-size:clamp(53px,6.7vw,100px);margin:10px 0 14px}
+.metro-copy .role{color:#2149aa}
+.metric{display:flex;align-items:baseline;gap:12px;margin:12px 0;color:#1749bb}
+.metric b{font:600 clamp(36px,4vw,65px)/1.2 Arial,sans-serif;letter-spacing:-.06em}
+.map{min-width:0;border:1px solid #a4b5b5;background:#e5ede5}
+.cartography{position:relative}
+.cartography>canvas:first-child{width:100%;height:auto;aspect-ratio:620/420;display:block}
+.cartography.live>canvas:first-child{visibility:hidden}
+.map figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 16px;background:#f4f6ee;border-top:1px solid #a4b5b5}
+.map figcaption small{display:block;color:#4e646c}
+#stations{display:flex;gap:5px}
+#stations button{width:31px;height:31px;border-radius:50%;background:transparent;border:1px solid #56727d;font:600 13px Arial,sans-serif}
+#stations button[aria-pressed=true]{background:#1743ab;color:white}
+.metro #works{background:#dce5db}
+.metro .works-list>a{border-left:3px solid #2258c9;padding-left:16px}
+.metro .works-list>a:nth-child(2){border-color:#ba572b}
+.metro .works-list>a:nth-child(3){border-color:#26746c}
+.revision{--bg:#211b25;--ink:#f4e5e0;--accent:#f7a69b}
+.revision .nav{border-bottom:1px solid #68535f;background:#221d26}
+.revision .wordmark{font-family:Consolas,monospace}
+.revision #intro{padding:26px 6% 35px;background:radial-gradient(ellipse at 17% 100%,#69404b 0%,transparent 72%),#2b222d}
+.rev-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:24px}
+.revision h1{font-family:Georgia,"Songti SC",SimSun,serif;letter-spacing:-.055em;font-weight:400;margin:8px 0 0}
+.rev-bio{max-width:39%;padding-bottom:4px}.rev-bio .case-link{color:#f5ae9f;margin-top:6px}
+.review{display:grid;grid-template-columns:1fr 1.13fr;gap:0;border:1px solid #9c7783;background:#291f2c;border-radius:6px;overflow:hidden}
+.history{position:relative;isolation:isolate;padding:20px 24px;overflow:hidden;background:linear-gradient(115deg,#593b4e,#31263d)}
+.history h2{font-size:clamp(22px,2.3vw,32px);font-weight:600}
+.history>p{font-size:12px;color:#e7cad6}
+.branch-art{position:absolute;inset:0 0 0 35%;z-index:-1}
+.commits{display:flex;align-items:start;flex-direction:column;gap:4px;margin-top:9px}
+.commits button{background:#312433d9;border:1px solid transparent;color:#ecdae6;font-size:13px;padding:3px 9px 3px 4px;border-radius:2px}
+.commits button i{background:#967c91;width:7px;height:7px;margin:0 9px 1px 2px;display:inline-block;border-radius:100%}
+.commits button[aria-pressed=true]{border-color:#a47d8c;color:#ffe3cb}
+.commits button[aria-pressed=true] i{background:#f7aa8e}
+.snapshot{align-self:stretch;background:#161520;border-left:1px solid #705561;min-width:0}
+.file{padding:10px 16px;background:#241f2c;justify-content:start;font:13px Consolas,monospace}
+.file i{width:8px;height:8px;border-radius:50%;background:#e7a595}
+#revision-id{margin-left:auto;color:#ceb3c1}
+#code{padding:14px 0;font:clamp(13px,1.3vw,17px)/1.8 Consolas,monospace;color:#d6c9df}
+#code>div{display:flex;padding-inline:12px;gap:14px}
+#code span{color:#9e889d;font-size:12px}
+#code code{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}
+.changed{color:#ffd3b8;background:#583441}
+.revision[data-motion=on] .changed{animation:highlight 1s ease-out}
+@keyframes highlight{from{background:#885157}}
+.revision #works{background:#f1e8e5;color:#32232d}
+.revision .works-list{gap:20px}.revision .works-list>a{border-top:1px solid #b897a4;padding-top:10px}
+@media(max-width:700px){
+ .nav{height:52px}.wordmark{font-size:19px}.nav nav{gap:12px}
+ .ticket #intro,.metro #intro{grid-template-columns:1fr;gap:19px;padding:26px 6% 45px}
+ .ticket #intro{background-position:center}.ticket-copy h1,.metro h1,.revision h1{font-size:clamp(49px,13vw,76px)}
+ .ticket-copy .bio{margin-top:12px}.stub{width:min(100%,350px);transform:rotate(1deg);padding:13px 18px}
+ .stub h2{margin-top:8px}.perforation{margin-top:12px}.barcode{height:15px}.latin{font-size:29px}
+ .works-list{grid-template-columns:1fr;gap:16px!important}.works-list>a{padding-bottom:8px}
+ .metro #intro{padding-bottom:22px}.metric{margin:8px 0}
+ .rev-head{display:block}.rev-bio{max-width:100%;margin-top:10px}.review{grid-template-columns:1fr}
+ .revision #intro{padding:21px 5%}.snapshot{border-left:0;border-top:1px solid #705561}.history{padding:14px 18px}
+ .map figcaption{padding:9px}.file{font-size:12px}
+}

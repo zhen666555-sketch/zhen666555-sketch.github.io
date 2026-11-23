@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ZHEN · 交互主题选样</title>
+  <style>
+    * {box-sizing:border-box}
+    body {margin:0;background:#1a191d;color:#f1eff2;font:15px/1.55 "Segoe UI","Microsoft YaHei",sans-serif}
+    main {width:min(1480px,96%);margin:auto;padding:19px 0 32px}
+    header,.controls,.themes,.sizes {display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    header,.controls {justify-content:space-between;gap:12px}
+    h1 {font-size:22px;letter-spacing:-.04em;margin:0}
+    a {color:inherit;text-underline-offset:4px}
+    .controls {margin:16px 0 12px}
+    button {background:#29282f;color:#d9d5dc;border:1px solid #4c4950;cursor:pointer;padding:8px 13px;font:inherit;border-radius:4px}
+    button[aria-pressed=true] {background:#f0e9df;color:#242125;border-color:#f0e9df}
+    button:focus-visible,a:focus-visible {outline:3px solid #e2a76c;outline-offset:2px}
+    .sizes button {padding:6px 9px;font-size:13px}
+    .themes{flex:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:650px}
+    .themes button{padding:3px;text-align:left;overflow:hidden}
+    .themes img{width:100%;height:52px;object-fit:cover;object-position:center 39%;border-radius:2px;display:block}
+    .themes span{display:block;padding:4px 6px}
+    #stage {padding:0;background:#100f12;border:1px solid #47434b;overflow:hidden;display:flex;justify-content:center}
+    iframe {width:100%;border:0;background:white;height:clamp(560px,78vh,960px);display:block}
+    #stage[data-size=phone] iframe {max-width:390px}
+    #desc {margin:8px 0 14px;color:#c8c3ce;font-size:14px}
+    @media(max-width:700px){.themes{flex-basis:100%}.themes span{font-size:12px;padding:4px 1px}}
+    @media(max-width:600px){main{width:96%}button{padding:6px 8px;font-size:14px}header a{font-size:13px}}
+  </style>
+</head>
+<body><main>
+  <header><h1>个人主页 · 主题选样</h1><a id="full" href="preview.html?t=ticket" target="_blank" rel="noopener">独立打开当前方案 ↗</a></header>
+  <div class="controls">
+    <div class="themes" role="group" aria-label="主题">
+      <button type="button" data-theme="ticket" aria-pressed="true"><img src="ticket.webp" alt=""><span>D　峡谷票根</span></button>
+      <button type="button" data-theme="metro" aria-pressed="false"><img src="metro.webp" alt=""><span>E　城市接驳图</span></button>
+      <button type="button" data-theme="revision" aria-pressed="false"><img src="revision.webp" alt=""><span>F　版本分岔</span></button>
+    </div>
+    <div class="sizes" role="group" aria-label="预览尺寸"><button type="button" data-size="wide" aria-pressed="true">自适应宽屏</button><button type="button" data-size="phone" aria-pressed="false">手机宽度</button></div>
+  </div>
+  <p><a href="../editions/index.html">查看天青、余晖、折页三款个人视觉选样 ↗</a></p>
+  <p id="desc"></p>
+  <div id="stage"><iframe title="个人主页交互样稿" src="about:blank"></iframe></div>
+</main>
+<script>
+  const themes = {
+    ticket:'以龙庆峡为封面。试着退一张示例门票，观察可用票数。',
+    metro:'以共享单车与地铁接驳为封面。选择站点，观察 500 米邻域。',
+    revision:'以创龄北京为封面。选择一次提交，查看对应的申请快照。'
+  };
+  const stage=document.querySelector('#stage');
+  function show() {
+    const key=Object.hasOwn(themes,location.hash.slice(1)) ? location.hash.slice(1) : 'ticket';
+    const url='preview.html?t='+key;
+    document.querySelector('iframe').src=url;
+    document.querySelector('#full').href=url;
+    document.querySelector('#desc').textContent=themes[key];
+    document.querySelectorAll('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===key)));
+  }
+  document.querySelector('.themes').addEventListener('click',e=>{const b=e.target.closest('button');if(b) location.hash=b.dataset.theme});
+  document.querySelector('.sizes').addEventListener('click',e=>{
+    if(!e.target.dataset.size)return;
+    stage.dataset.size=e.target.dataset.size;
+    document.querySelectorAll('button[data-size]').forEach(b=>b.setAttribute('aria-pressed',String(b===e.target)));
+  });
+  window.addEventListener('hashchange',show);
+  show();
+</script></body></html>

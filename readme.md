@@ -8,7 +8,7 @@
 
 参与过文旅票务、户外活动与知识服务系统开发，工作覆盖小程序、运营后台、服务端与数据库。下面三个案例展示了我在交易一致性、活动流程和数据分析上的具体工作。
 
-**[访问在线作品集](https://zhen666555-sketch.github.io/)**　·　[GitHub](https://github.com/zhen666555-sketch)　·　[邮件联系](mailto:zhen666555@gmail.com)
+**[访问在线作品集](https://zhen666555-sketch.github.io/)**　·　[GitHub](https://github.com/zhen666555-sketch)　·　[邮件联系](mailto:17652855746@163.com)
 
 ## 代表项目
 

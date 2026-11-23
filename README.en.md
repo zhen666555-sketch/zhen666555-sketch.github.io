@@ -8,7 +8,7 @@
 
 I've worked on scenic-area ticketing, outdoor event management, and knowledge services, building mini programs, admin dashboards, APIs, and database workflows. The projects below show how I handle transaction consistency, event operations, and geospatial analysis.
 
-**[View portfolio](https://zhen666555-sketch.github.io/en/)** · [GitHub](https://github.com/zhen666555-sketch) · [Email](mailto:zhen666555@gmail.com)
+**[View portfolio](https://zhen666555-sketch.github.io/en/)** · [GitHub](https://github.com/zhen666555-sketch) · [Email](mailto:17652855746@163.com)
 
 ## Selected projects
 
